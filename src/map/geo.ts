@@ -16,4 +16,6 @@ export const LAKES = geo._lakes as string[];
 export const RIVERS = geo._rivers as { name: string | null; size: number; d: string }[];
 export const ROADS = geo._roads as { name: string | null; size: number; d: string }[];
 export const MOUNTAINS = geo._mountains as [number, number][];
+/** Land that belongs to no territory (Skagos): drawn, not selectable. */
+export const SCENERY = geo._scenery as string;
 export const WALL_LINE = geo._wall as string;

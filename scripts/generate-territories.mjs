@@ -100,6 +100,8 @@ const SEA_LINKS_EXTRA = [
   ["pentos", "braavos"],
 ];
 const SKIP_AUTO_SEA_LINK = ["pentos", "braavos"]; // linked explicitly above, not to the nearest Westeros territory
+// Land drawn as unselectable scenery (not part of any territory): [lonMin, latMin, lonMax, latMax].
+const SCENERY_BOXES = [[22.9, 32.8, 25.4, 36.8]]; // Skagos and Skane
 const FORCE_NOT_ADJACENT = []; // [a, b] pairs removed from derived land adjacency
 
 // Region priority: earlier regions win overlaps. political = names in the source layer.
@@ -303,6 +305,12 @@ for (const t of territories) {
 
 // ---------------------------------------------------------------- territory shapes
 const shapes = {}; // id -> MultiPolygon
+const sceneryPolys = []; // polygons drawn but owned by no territory
+const isScenery = (poly) => {
+  const [cx, cy] = centroidOf(poly);
+  const lon = LON0 + (cx - PAD) / S, lat = LAT_TOP - (cy - PAD) / S;
+  return SCENERY_BOXES.some(([a, b, c, d]) => lon >= a && lon <= c && lat >= b && lat <= d);
+};
 const add = (id, polys) => (shapes[id] = (shapes[id] ?? []).concat(polys));
 const centroidOf = (poly) => {
   const pts = poly[0];
@@ -317,6 +325,10 @@ for (const [rid, mp] of Object.entries(regionPolys)) {
     continue;
   }
   for (const poly of mp) {
+    if (isScenery(poly)) {
+      sceneryPolys.push(poly);
+      continue;
+    }
     const inside = regionSeats.filter((t) => pointInPoly(seats[t.id], poly));
     if (inside.length === 1) {
       add(inside[0].id, [poly]);
@@ -503,6 +515,7 @@ geo._rivers = rivers;
 geo._roads = roads;
 geo._mountains = mountainMarks;
 geo._wall = linePath(wallLine);
+geo._scenery = multiPath(sceneryPolys);
 writeFileSync(join(root, "src/data/territories.geo.json"), JSON.stringify(geo) + "\n");
 
 for (const t of territories) t.adjacent = [...adj[t.id]].sort();

@@ -57,7 +57,7 @@ The geography comes from real map data, trimmed into `scripts/source/westeros-so
 
 1. Projects the political regions into a 1000-wide map space, merges the Gift into the North, cuts a thin strip along the Wall (The Wall region) and crops everything north of it (Beyond the Wall).
 2. Adds a strip of the Essos west coast for the Free Cities (Pentos and Braavos).
-3. Splits each region with a Voronoi diagram of its castle seats. Islets with no castle go to the nearest castle of the region (Skagos belongs to Karhold, for example).
+3. Splits each region with a Voronoi diagram of its castle seats. Islets with no castle go to the nearest castle of the region (Skagos and Skane are the exception: they are drawn as unselectable scenery (`SCENERY_BOXES`)).
 4. Derives land adjacency from shared boundaries and adds sea links for islands and the Narrow Sea crossings.
 
 Seats are real castle positions from the source data. A few have no source location and were placed by hand: Frostfangs, Hardhome, the Fingers, the Arbor, Bear Island. Casterly Rock uses Lannisport's position. Seats that fall just off the coast are moved onto land. To tune anything, edit the tables at the top of `scripts/generate-territories.mjs` (`SEAT_SOURCE`, `SEA_LINKS_EXTRA`, `FORCE_NOT_ADJACENT`) and run `npm run generate`. Re-running overwrites `territories.geo.json`, `territories.json` seats and adjacency, and region label positions.

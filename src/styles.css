@@ -38,6 +38,7 @@ button.link { border: none; background: none; color: var(--accent); text-decorat
 .terr { stroke: #7a6a4f; stroke-width: 0.8; cursor: pointer; outline: none; transition: filter 0.1s; }
 .terr.hovered { filter: brightness(1.07) saturate(1.1); }
 .terr:focus-visible { stroke: var(--accent); stroke-width: 2.5; }
+.scenery { fill: #cdd2c3; stroke: #7a6a4f; stroke-width: 0.8; }
 .region-border { fill: none; stroke: #4f4130; stroke-width: 2.4; stroke-linejoin: round; }
 .outline { fill: none; }
 .outline.hover { stroke: #fff6dc; stroke-width: 2.5; }

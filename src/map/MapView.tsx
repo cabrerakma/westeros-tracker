@@ -6,7 +6,7 @@ import { REGIONS, TERRITORIES } from "../data";
 import type { Faction, FactionId, Territory } from "../types";
 import { controlState } from "../state/status";
 import { regionSummary } from "../state/status";
-import { LAKES, MOUNTAINS, REGION_PATHS, RIVERS, ROADS, SEA_LINKS, TERRITORY_PATHS, VIEWBOX } from "./geo";
+import { LAKES, MOUNTAINS, REGION_PATHS, RIVERS, ROADS, SCENERY, SEA_LINKS, TERRITORY_PATHS, VIEWBOX } from "./geo";
 import { CastleIcon } from "./CastleIcon";
 
 export interface Layers {
@@ -204,6 +204,9 @@ export const MapView = forwardRef<MapHandle, Props>(function MapView({ holders, 
               return <line key={a + b} x1={ta.seat[0]} y1={ta.seat[1]} x2={tb.seat[0]} y2={tb.seat[1]} className="sea-link" vectorEffect="non-scaling-stroke" />;
             })}
           </g>
+
+          {/* unselectable scenery (Skagos) */}
+          <path d={SCENERY} className="scenery" vectorEffect="non-scaling-stroke" pointerEvents="none" />
 
           {/* territories */}
           <g>

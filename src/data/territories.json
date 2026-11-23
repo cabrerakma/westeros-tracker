@@ -61,7 +61,6 @@
     "adjacent": [
       "hardhome",
       "haunted-forest",
-      "karhold",
       "last-hearth"
     ]
   },
@@ -96,7 +95,6 @@
       420
     ],
     "adjacent": [
-      "castle-black",
       "dreadfort",
       "last-hearth"
     ]
