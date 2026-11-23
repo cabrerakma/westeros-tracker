@@ -5,15 +5,17 @@
     "labelPos": [
       500,
       110
-    ]
+    ],
+    "labelSize": 36
   },
   {
     "id": "the-wall",
     "name": "The Wall",
     "labelPos": [
-      520,
-      290
-    ]
+      380,
+      333
+    ],
+    "labelSize": 15
   },
   {
     "id": "the-north",
@@ -21,7 +23,8 @@
     "labelPos": [
       520,
       510
-    ]
+    ],
+    "labelSize": 44
   },
   {
     "id": "the-riverlands",
@@ -29,39 +32,45 @@
     "labelPos": [
       450,
       990
-    ]
+    ],
+    "labelSize": 30
   },
   {
     "id": "the-vale",
     "name": "The Vale",
     "labelPos": [
-      770,
-      1010
-    ]
+      795,
+      968
+    ],
+    "labelSize": 22
   },
   {
     "id": "the-westerlands",
     "name": "The Westerlands",
     "labelPos": [
-      220,
-      1170
-    ]
+      215,
+      1150
+    ],
+    "labelSize": 20
   },
   {
     "id": "the-iron-islands",
     "name": "The Iron Islands",
     "labelPos": [
-      95,
-      900
-    ]
+      26,
+      990
+    ],
+    "labelSize": 17,
+    "labelRotate": -90
   },
   {
     "id": "the-crownlands",
     "name": "The Crownlands",
     "labelPos": [
-      680,
-      1190
-    ]
+      672,
+      1196
+    ],
+    "labelSize": 18
   },
   {
     "id": "the-reach",
@@ -69,22 +78,25 @@
     "labelPos": [
       320,
       1430
-    ]
+    ],
+    "labelSize": 34
   },
   {
     "id": "the-stormlands",
     "name": "The Stormlands",
     "labelPos": [
-      740,
-      1440
-    ]
+      700,
+      1460
+    ],
+    "labelSize": 25
   },
   {
     "id": "dorne",
     "name": "Dorne",
     "labelPos": [
-      610,
-      1800
-    ]
+      620,
+      1810
+    ],
+    "labelSize": 36
   }
 ]

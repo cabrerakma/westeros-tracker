@@ -80,6 +80,7 @@
     ],
     "adjacent": [
       "castle-black",
+      "deepwood-motte",
       "dreadfort",
       "karhold",
       "winterfell"
@@ -130,6 +131,8 @@
     ],
     "adjacent": [
       "bear-island",
+      "last-hearth",
+      "moat-cailin",
       "winterfell"
     ]
   },
@@ -183,8 +186,7 @@
     ],
     "adjacent": [
       "dreadfort",
-      "moat-cailin",
-      "the-fingers"
+      "moat-cailin"
     ]
   },
   {
@@ -199,6 +201,7 @@
       820
     ],
     "adjacent": [
+      "deepwood-motte",
       "dreadfort",
       "the-twins",
       "white-harbor",
@@ -364,8 +367,7 @@
     ],
     "adjacent": [
       "eyrie",
-      "gulltown",
-      "white-harbor"
+      "gulltown"
     ]
   },
   {
@@ -399,6 +401,7 @@
     "adjacent": [
       "ashemark",
       "casterly-rock",
+      "goldengrove",
       "raventree-hall",
       "riverrun",
       "seagard",
@@ -436,6 +439,7 @@
     "adjacent": [
       "casterly-rock",
       "golden-tooth",
+      "goldengrove",
       "highgarden"
     ]
   },
@@ -485,8 +489,7 @@
     "adjacent": [
       "bronzegate",
       "dragonstone",
-      "duskendale",
-      "goldengrove"
+      "duskendale"
     ]
   },
   {
@@ -516,6 +519,7 @@
       1180
     ],
     "adjacent": [
+      "goldengrove",
       "harrenhal",
       "kings-landing",
       "raventree-hall"
@@ -551,9 +555,12 @@
       1290
     ],
     "adjacent": [
+      "ashemark",
+      "brightwater-keep",
       "bronzegate",
+      "duskendale",
+      "golden-tooth",
       "highgarden",
-      "kings-landing",
       "nightsong",
       "raventree-hall"
     ]
@@ -587,6 +594,7 @@
       1550
     ],
     "adjacent": [
+      "brightwater-keep",
       "horn-hill",
       "the-arbor"
     ]
@@ -618,9 +626,12 @@
       1560
     ],
     "adjacent": [
+      "goldengrove",
+      "hellholt",
       "highgarden",
       "horn-hill",
       "nightsong",
+      "oldtown",
       "starfall",
       "yronwood"
     ]
@@ -676,6 +687,7 @@
       "bronzegate",
       "goldengrove",
       "storms-end",
+      "sunspear",
       "yronwood"
     ]
   },
@@ -709,7 +721,6 @@
       "brightwater-keep",
       "hellholt",
       "nightsong",
-      "starfall",
       "sunspear"
     ]
   },
@@ -725,6 +736,7 @@
       1790
     ],
     "adjacent": [
+      "nightsong",
       "yronwood"
     ]
   },
@@ -741,8 +753,7 @@
     ],
     "adjacent": [
       "brightwater-keep",
-      "hellholt",
-      "yronwood"
+      "hellholt"
     ]
   },
   {
@@ -757,6 +768,7 @@
       1840
     ],
     "adjacent": [
+      "brightwater-keep",
       "starfall",
       "yronwood"
     ]

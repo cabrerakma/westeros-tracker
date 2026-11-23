@@ -17,6 +17,8 @@ export interface Region {
   id: RegionId;
   name: string;
   labelPos: [number, number];
+  labelSize?: number; // font size in map units (default 32)
+  labelRotate?: number; // degrees
 }
 
 export type Tier = "city" | "fortress" | "castle" | "holdfast";
