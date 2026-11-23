@@ -6,7 +6,7 @@ import { REGIONS, TERRITORIES } from "../data";
 import type { Faction, FactionId, Territory } from "../types";
 import { controlState } from "../state/status";
 import { regionSummary } from "../state/status";
-import { LAKES, REGION_PATHS, ROADS, SCENERY, SCENERY_LABELS, SEA_LINKS, TERRITORY_PATHS, VIEWBOX } from "./geo";
+import { LAKES, MOUNTAINS, REGION_PATHS, RIVERS, ROADS, SCENERY, SCENERY_LABELS, SEA_LINKS, TERRITORY_PATHS, VIEWBOX } from "./geo";
 import { CastleIcon } from "./CastleIcon";
 import { holderFill } from "./colors";
 
@@ -231,8 +231,14 @@ export const MapView = forwardRef<MapHandle, Props>(function MapView({ holders, 
             {LAKES.map((d, i) => (
               <path key={"l" + i} d={d} className="lake" vectorEffect="non-scaling-stroke" />
             ))}
+            {RIVERS.map((r, i) => (
+              <path key={"r" + i} d={r.d} className={r.size >= 2 ? "river big" : "river"} vectorEffect="non-scaling-stroke" />
+            ))}
             {ROADS.map((r, i) => (
               <path key={"d" + i} d={r.d} className="road" vectorEffect="non-scaling-stroke" />
+            ))}
+            {MOUNTAINS.map(([x, y], i) => (
+              <path key={"m" + i} d={`M${x - 4.5} ${y + 3}L${x - 1} ${y - 3.5}L${x + 1} ${y - 1}L${x + 2.5} ${y - 3}L${x + 5} ${y + 3}Z`} className="mountain" vectorEffect="non-scaling-stroke" />
             ))}
           </g>
 

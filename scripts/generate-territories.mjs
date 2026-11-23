@@ -1,6 +1,6 @@
 // Builds the map geometry from the real-map source data (scripts/source/westeros-source.json).
 // Run: npm run generate. Writes:
-//   src/data/territories.geo.json  shapes (SVG paths), region outlines, roads, lakes, labels
+//   src/data/territories.geo.json  shapes (SVG paths), region outlines, rivers, roads, lakes, mountains, labels
 //   src/data/territories.json      seats (real castle positions) and re-derived adjacency
 //   src/data/regions.json          label positions and sizes
 //
@@ -474,7 +474,40 @@ const lakes = src.lakes
   .map((mp) => dropTiny(mp, 40)) // thin slivers look like stray lines
   .filter((mp) => mp.length)
   .map(multiPath);
+// Rivers: keep only the parts inside the map (the northern crop would otherwise leave stray lines).
+const riverRuns = (line) => {
+  const runs = [];
+  let cur = [];
+  for (const p of line.map(proj)) {
+    if (p[1] >= PAD + 3) cur.push(p);
+    else {
+      if (cur.length > 1) runs.push(cur);
+      cur = [];
+    }
+  }
+  if (cur.length > 1) runs.push(cur);
+  return runs;
+};
+const rivers = src.rivers
+  .map((r) => ({ name: r.name, size: r.size, d: r.lines.flatMap(riverRuns).map(linePath).join("") }))
+  .filter((r) => r.d);
 const roads = src.roads.map((r) => ({ name: r.name, size: r.size, d: linePath(r.line.map(proj)) }));
+// Mountain marks: scatter small peaks inside the source mountain areas.
+const mountainMarks = [];
+for (const m of src.mountains) {
+  for (const poly of projMulti(m.poly)) {
+    const xs = poly[0].map((p) => p[0]), ys = poly[0].map((p) => p[1]);
+    const gap = 19;
+    for (let x = Math.min(...xs); x <= Math.max(...xs); x += gap) {
+      for (let y = Math.min(...ys); y <= Math.max(...ys); y += gap) {
+        const key = `${m.name}${r1(x)}${r1(y)}`;
+        const p = [x + (rand01(hash(key)) - 0.5) * gap * 0.8, y + (rand01(hash(key + "y")) - 0.5) * gap * 0.8];
+        if (pointInPoly(p, poly) && p[1] >= PAD + 6) mountainMarks.push([r1(p[0]), r1(p[1])]);
+      }
+    }
+  }
+}
+
 // ---------------------------------------------------------------- region labels
 const labels = {};
 const sceneryLabels = [];
@@ -517,7 +550,9 @@ geo._regions = Object.fromEntries(Object.entries(regionPolys).filter(([k]) => !S
 geo._sceneryLabels = sceneryLabels;
 geo._seaLinks = seaLinks;
 geo._lakes = lakes;
+geo._rivers = rivers;
 geo._roads = roads;
+geo._mountains = mountainMarks;
 geo._wall = linePath(wallLine);
 geo._scenery = multiPath(sceneryPolys);
 writeFileSync(join(root, "src/data/territories.geo.json"), JSON.stringify(geo) + "\n");
