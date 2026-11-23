@@ -6,6 +6,7 @@ Revised Nov 24, 2026. Supersedes `westeros-map-spec.md`. This version cuts the r
 > - **Real map.** The geography now comes from the Game of Thrones shapefiles (map by Tear and theMountainGoat, GIS data by cadaei, revised by Patrick Triest; CC BY-NC-SA 3.0, non-commercial, credit required). The "original art" rule is lifted by the owner for this private project. The hand-drawn region polygons and the seed coordinates in section 4 are replaced by the real castle positions; section 3's build method is now: real region polygons, then Voronoi per region.
 > - **46 territories, 12 regions.** Pentos and Braavos are added as a new region, The Free Cities, a strip of the Essos west coast. Targaryen starts holding both (home faction Targaryen). Targaryen therefore starts with 2 territories, not 0.
 > - **No turns and no game mechanics.** Drop the turn counter, season label, turn numbers in the log, battles, exports and scenarios. Battles keep a date instead. The map only records who holds what, plus a simple history of fights per territory (who fought, who won, players, notes). Capturing may offer to update the holder, nothing more.
+> - **Nightsong starts held by Tyrell** (Lord Caron fought for Renly). Its home faction stays Baratheon, so it shows the occupied ring. The map is used alongside the A Song of Ice and Fire miniatures game, so it only tracks who holds what.
 > - **Simplest option wins.** Where this spec is ambiguous, build the smaller thing.
 
 ## 1. Overview
@@ -106,10 +107,10 @@ Portrait SVG, `viewBox="0 0 1000 2000"`, north at top, the Wall about one-sixth 
 | --- | --- | --- | --- | --- |
 | stark | House Stark | #8FA3B0 slate grey | wolf head | North (7) + Riverlands (5) |
 | lannister | House Lannister | #B3261E crimson | lion head | Westerlands (4) |
-| baratheon | House Baratheon | #E0B020 gold | stag head | Stormlands + Crownlands (7) |
+| baratheon | House Baratheon | #E0B020 gold | stag head | Stormlands (3, without Nightsong) + Crownlands (3) = 6 |
 | targaryen | House Targaryen | #6A1B4D plum | three-headed dragon | Nothing |
 | greyjoy | House Greyjoy | #1E3A4C deep teal | kraken | Iron Islands (2) |
-| tyrell | House Tyrell | #3E8E3E green | rose | The Reach (6) |
+| tyrell | House Tyrell | #3E8E3E green | rose | The Reach (6) + Nightsong (7) |
 | martell | House Martell | #E4731C orange | sun and spear | Dorne (4) |
 | night-watch | Night's Watch | #2B2B2B near-black | crossed swords | The Wall (1) |
 | free-folk | Free Folk | #A58B5B tan | horned skull | Beyond the Wall (3) |
