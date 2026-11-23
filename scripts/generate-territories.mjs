@@ -366,6 +366,40 @@ function overlapLength([a1, a2], [b1, b2]) {
   const hi = Math.min(len, Math.max(proj1(b1), proj1(b2)));
   return Math.max(0, hi - lo);
 }
+// Make territories contiguous. Straight-line Voronoi ignores bays, so a piece can end up cut off from the
+// rest of its territory (the far shore of Blackwater Bay went to Duskendale). Such a piece is handed to the
+// neighbour it touches most. Pieces that touch nobody (islands, islets) stay where they are.
+const sharedLength = (pa, pb) => {
+  let total = 0;
+  for (const ea of edgesOf([pa])) for (const eb of edgesOf([pb])) total += overlapLength(ea, eb);
+  return total;
+};
+const reassigned = [];
+for (const t of territories) {
+  const list = shapes[t.id];
+  if (!list || list.length < 2) continue;
+  let main = list.filter((p) => pointInPoly(seats[t.id], p));
+  if (!main.length) main = [list.reduce((m, p) => (polyArea(p) > polyArea(m) ? p : m), list[0])];
+  for (const piece of [...list]) {
+    if (main.includes(piece)) continue;
+    if (main.some((m) => sharedLength(piece, m) >= 5)) continue; // still connected
+    let best = null;
+    for (const u of territories) {
+      if (u.id === t.id || u.region !== t.region) continue;
+      const d = (shapes[u.id] ?? []).reduce((sum, q) => sum + sharedLength(piece, q), 0);
+      if (d >= 10 && (!best || d > best.d)) best = { id: u.id, d };
+    }
+    if (best) {
+      shapes[t.id] = shapes[t.id].filter((p) => p !== piece);
+      shapes[best.id].push(piece);
+      reassigned.push(`${t.id} -> ${best.id}`);
+    }
+  }
+}
+if (reassigned.length) console.log("Reassigned cut-off pieces: " + reassigned.join(", "));
+// Merge pieces of a territory that touch each other, so no seam is drawn between them.
+for (const t of territories) if (shapes[t.id]?.length > 1) shapes[t.id] = union(shapes[t.id].map((p) => [p]));
+
 const ids = territories.map((t) => t.id);
 const edges = Object.fromEntries(ids.map((id) => [id, edgesOf(shapes[id] ?? [])]));
 const boxes = Object.fromEntries(ids.map((id) => [id, bboxOf(shapes[id] ?? [[[[0, 0]]]])]));

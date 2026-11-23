@@ -312,7 +312,6 @@
       "gulltown",
       "harrenhal",
       "raventree-hall",
-      "runestone",
       "seagard",
       "the-fingers",
       "the-twins"
@@ -331,7 +330,8 @@
     ],
     "adjacent": [
       "eyrie",
-      "runestone"
+      "runestone",
+      "the-fingers"
     ]
   },
   {
@@ -346,9 +346,7 @@
       908.3
     ],
     "adjacent": [
-      "eyrie",
-      "gulltown",
-      "the-fingers"
+      "gulltown"
     ]
   },
   {
@@ -364,7 +362,7 @@
     ],
     "adjacent": [
       "eyrie",
-      "runestone"
+      "gulltown"
     ]
   },
   {
@@ -517,7 +515,6 @@
       1096
     ],
     "adjacent": [
-      "bronzegate",
       "dragonstone",
       "harrenhal",
       "kings-landing"
@@ -659,7 +656,6 @@
       1225.7
     ],
     "adjacent": [
-      "duskendale",
       "goldengrove",
       "kings-landing",
       "storms-end",
