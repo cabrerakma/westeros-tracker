@@ -34,7 +34,7 @@ const LAT_TOP = 43.5; // crop line north of the Wall
 const LAT_BOTTOM = -12.5;
 const PAD = 20; // map-space padding
 const WALL_THICKNESS = 0.6; // source units
-const WALL_EXTEND = [3.2, 1.6]; // extend the wall line west / east so it spans the whole landmass
+const WALL_EXTEND = [0.8, 3.2]; // extend the wall line at its east end / west end (the source line runs east to west)
 const MIN_SHARED_EDGE = 20; // map units of shared boundary needed to count as land-adjacent
 const EDGE_TOL = 1.2;
 
