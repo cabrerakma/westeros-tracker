@@ -28,7 +28,6 @@ export function App() {
     <div className="app">
       <header className="topbar">
         <h1>Westeros Tracker</h1>
-        <span className="turn">Turn {scenario.turn}</span>
         <div className="spacer" />
         <button onClick={() => map.current?.fit()}>Fit all</button>
         <details className="layers">

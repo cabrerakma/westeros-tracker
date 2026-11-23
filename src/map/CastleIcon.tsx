@@ -1,6 +1,6 @@
 import type { Tier } from "../types";
 
-const SIZE: Record<Tier, number> = { city: 30, fortress: 24, castle: 19, holdfast: 14 };
+const SIZE: Record<Tier, number> = { city: 17, fortress: 14, castle: 11, holdfast: 8 };
 
 /** Simple original castle mark, centered on the seat point. Size depends on tier. */
 export function CastleIcon({ tier }: { tier: Tier }) {

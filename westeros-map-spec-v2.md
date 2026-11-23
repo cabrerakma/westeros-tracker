@@ -2,6 +2,12 @@
 
 Revised Nov 24, 2026. Supersedes `westeros-map-spec.md`. This version cuts the rules-adjacent features: the map is a tracker, not a rules engine.
 
+> **Revision 3 (Nov 24, 2026) overrides anything below that disagrees:**
+> - **Real map.** The geography now comes from the Game of Thrones shapefiles (map by Tear and theMountainGoat, GIS data by cadaei, revised by Patrick Triest; CC BY-NC-SA 3.0, non-commercial, credit required). The "original art" rule is lifted by the owner for this private project. The hand-drawn region polygons and the seed coordinates in section 4 are replaced by the real castle positions; section 3's build method is now: real region polygons, then Voronoi per region.
+> - **46 territories, 12 regions.** Pentos and Braavos are added as a new region, The Free Cities, a strip of the Essos west coast. Targaryen starts holding both (home faction Targaryen). Targaryen therefore starts with 2 territories, not 0.
+> - **No turns and no game mechanics.** Drop the turn counter, season label, turn numbers in the log, battles, exports and scenarios. Battles keep a date instead. The map only records who holds what, plus a simple history of fights per territory (who fought, who won, players, notes). Capturing may offer to update the holder, nothing more.
+> - **Simplest option wins.** Where this spec is ambiguous, build the smaller thing.
+
 ## 1. Overview
 
 Build a browser-based, interactive map of Westeros that a small group of friends uses to track which faction controls which territory in a wargame campaign, plus a history of battles fought on each territory. One game master (GM) updates it; everyone else watches live.

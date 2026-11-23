@@ -1,7 +1,6 @@
 {
   "id": "war-of-five-kings",
   "name": "War of the Five Kings",
-  "turn": 1,
   "factions": [
     {
       "id": "stark",
@@ -227,6 +226,12 @@
     },
     "hellholt": {
       "holder": "martell"
+    },
+    "pentos": {
+      "holder": "targaryen"
+    },
+    "braavos": {
+      "holder": "targaryen"
     }
   }
 }

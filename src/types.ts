@@ -42,7 +42,6 @@ export interface TerritoryState {
 
 export interface LogEntry {
   id: string;
-  turn: number;
   timestamp: string; // ISO 8601
   territory?: TerritoryId;
   action: string; // "holder-changed", "battle-recorded", "undo", ...
@@ -53,8 +52,7 @@ export interface LogEntry {
 
 export interface Battle {
   id: string;
-  turn: number;
-  timestamp: string;
+  timestamp: string; // when it was recorded; the date is what the history shows
   territory: TerritoryId;
   attacker: { faction: FactionId; players: string[] };
   defender: { faction: FactionId; players: string[] };
@@ -67,8 +65,6 @@ export interface Battle {
 export interface GameState {
   version: 1;
   scenarioId: string;
-  turn: number;
-  turnLabel?: string; // e.g. "Autumn 299 AC"
   territories: Record<TerritoryId, TerritoryState>;
   factions: Faction[]; // state copy so GM edits persist
   log: LogEntry[];
@@ -78,7 +74,6 @@ export interface GameState {
 export interface Scenario {
   id: string;
   name: string;
-  turn: number;
   factions: Faction[];
   territories: Record<TerritoryId, TerritoryState>;
 }

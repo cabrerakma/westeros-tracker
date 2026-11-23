@@ -1,7 +1,6 @@
 {
   "id": "blank",
   "name": "Blank (everything unclaimed)",
-  "turn": 1,
   "factions": [
     {
       "id": "stark",
@@ -226,6 +225,12 @@
       "holder": "neutral"
     },
     "hellholt": {
+      "holder": "neutral"
+    },
+    "pentos": {
+      "holder": "neutral"
+    },
+    "braavos": {
       "holder": "neutral"
     }
   }

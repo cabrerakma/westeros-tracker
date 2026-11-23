@@ -3,100 +3,109 @@
     "id": "beyond-the-wall",
     "name": "Beyond the Wall",
     "labelPos": [
-      500,
-      110
+      278,
+      140
     ],
-    "labelSize": 36
+    "labelSize": 18.9
   },
   {
     "id": "the-wall",
     "name": "The Wall",
     "labelPos": [
-      380,
-      333
+      538.9,
+      259.6
     ],
-    "labelSize": 15
+    "labelSize": 11
   },
   {
     "id": "the-north",
     "name": "The North",
     "labelPos": [
-      520,
-      510
+      463.4,
+      510.6
     ],
-    "labelSize": 44
+    "labelSize": 40
   },
   {
     "id": "the-riverlands",
     "name": "The Riverlands",
     "labelPos": [
-      450,
-      990
+      449.1,
+      1023.7
     ],
-    "labelSize": 30
+    "labelSize": 21.9
   },
   {
     "id": "the-vale",
     "name": "The Vale",
     "labelPos": [
-      795,
-      968
+      563.7,
+      892.3
     ],
-    "labelSize": 22
+    "labelSize": 40
   },
   {
     "id": "the-westerlands",
     "name": "The Westerlands",
     "labelPos": [
-      215,
-      1150
+      282.9,
+      1105.7
     ],
-    "labelSize": 20
+    "labelSize": 17.1
   },
   {
     "id": "the-iron-islands",
     "name": "The Iron Islands",
     "labelPos": [
-      26,
-      990
+      145.4,
+      916.9
     ],
-    "labelSize": 17,
+    "labelSize": 15,
     "labelRotate": -90
   },
   {
     "id": "the-crownlands",
     "name": "The Crownlands",
     "labelPos": [
-      672,
-      1196
+      559.1,
+      1111.1
     ],
-    "labelSize": 18
+    "labelSize": 13
   },
   {
     "id": "the-reach",
     "name": "The Reach",
     "labelPos": [
-      320,
-      1430
+      433.4,
+      1230.3
     ],
-    "labelSize": 34
+    "labelSize": 40
   },
   {
     "id": "the-stormlands",
     "name": "The Stormlands",
     "labelPos": [
-      700,
-      1460
+      586.9,
+      1245.7
     ],
-    "labelSize": 25
+    "labelSize": 13
   },
   {
     "id": "dorne",
     "name": "Dorne",
     "labelPos": [
-      620,
-      1810
+      397.7,
+      1480
     ],
-    "labelSize": 36
+    "labelSize": 39.5
+  },
+  {
+    "id": "the-free-cities",
+    "name": "The Free Cities",
+    "labelPos": [
+      900.3,
+      1052.3
+    ],
+    "labelSize": 17
   }
 ]

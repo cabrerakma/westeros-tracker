@@ -6,8 +6,7 @@ import { REGIONS, TERRITORIES } from "../data";
 import type { Faction, FactionId, Territory } from "../types";
 import { controlState } from "../state/status";
 import { regionSummary } from "../state/status";
-import { MOUNTAINS, RIVERS, ROADS, smoothPath } from "./decor";
-import { REGION_PATHS, SEA_LINKS, TERRITORY_PATHS } from "./geo";
+import { LAKES, MOUNTAINS, REGION_PATHS, RIVERS, ROADS, SEA_LINKS, TERRITORY_PATHS, VIEWBOX } from "./geo";
 import { CastleIcon } from "./CastleIcon";
 
 export interface Layers {
@@ -43,6 +42,7 @@ const REGION_TINT: Record<string, string> = {
   "the-reach": "#cfdab0",
   "the-stormlands": "#d9d6a8",
   dorne: "#e3c99a",
+  "the-free-cities": "#d6cfdc",
 };
 
 function lighten(hex: string, amount: number): string {
@@ -108,7 +108,7 @@ export const MapView = forwardRef<MapHandle, Props>(function MapView({ holders, 
     const svg = svgRef.current!;
     const z = zoom<SVGSVGElement, unknown>()
       .scaleExtent([1, 14])
-      .translateExtent([[-250, -150], [1250, 2150]])
+      .translateExtent([[-250, -150], [VIEWBOX[2] + 250, VIEWBOX[3] + 150]])
       .clickDistance(4)
       .on("zoom", (e) => {
         gRef.current?.setAttribute("transform", e.transform.toString());
@@ -118,7 +118,7 @@ export const MapView = forwardRef<MapHandle, Props>(function MapView({ holders, 
     select(svg).call(z).on("dblclick.zoom", null);
     const ro = new ResizeObserver(() => {
       const r = svg.getBoundingClientRect();
-      if (r.width > 0) setU(Math.min(r.width / 1000, r.height / 2000));
+      if (r.width > 0) setU(Math.min(r.width / VIEWBOX[2], r.height / VIEWBOX[3]));
     });
     ro.observe(svg);
     return () => {
@@ -138,7 +138,7 @@ export const MapView = forwardRef<MapHandle, Props>(function MapView({ holders, 
       select(svgRef.current)
         .transition()
         .duration(450)
-        .call(zoomRef.current.transform, zoomIdentity.translate(500 - scale * t.seat[0], 1000 - scale * t.seat[1]).scale(scale));
+        .call(zoomRef.current.transform, zoomIdentity.translate(VIEWBOX[2] / 2 - scale * t.seat[0], VIEWBOX[3] / 2 - scale * t.seat[1]).scale(scale));
     },
   }));
 
@@ -180,7 +180,7 @@ export const MapView = forwardRef<MapHandle, Props>(function MapView({ holders, 
 
   return (
     <div className="map-wrap" ref={wrapRef}>
-      <svg ref={svgRef} className="map-svg" viewBox="0 0 1000 2000" preserveAspectRatio="xMidYMid meet" role="group" aria-label="Map of Westeros" onClick={(e) => e.target === e.currentTarget && onSelect(null)}>
+      <svg ref={svgRef} className="map-svg" viewBox={`0 0 ${VIEWBOX[2]} ${VIEWBOX[3]}`} preserveAspectRatio="xMidYMid meet" role="group" aria-label="Map of Westeros" onClick={(e) => e.target === e.currentTarget && onSelect(null)}>
         <defs>
           <radialGradient id="ocean" cx="50%" cy="45%" r="75%">
             <stop offset="0%" stopColor="#b9c9d0" />
@@ -224,14 +224,17 @@ export const MapView = forwardRef<MapHandle, Props>(function MapView({ holders, 
 
           {layers.decor && (
             <g pointerEvents="none" className="decor">
-              {RIVERS.map((r) => (
-                <path key={r.id} d={smoothPath(r.pts)} className="river" vectorEffect="non-scaling-stroke" />
+              {LAKES.map((d, i) => (
+                <path key={"l" + i} d={d} className="lake" vectorEffect="non-scaling-stroke" />
               ))}
-              {ROADS.map((r) => (
-                <path key={r.id} d={smoothPath(r.pts)} className="road" vectorEffect="non-scaling-stroke" />
+              {RIVERS.map((r, i) => (
+                <path key={"r" + i} d={r.d} className={r.size >= 2 ? "river big" : "river"} vectorEffect="non-scaling-stroke" />
+              ))}
+              {ROADS.map((r, i) => (
+                <path key={"d" + i} d={r.d} className="road" vectorEffect="non-scaling-stroke" />
               ))}
               {MOUNTAINS.map(([x, y], i) => (
-                <path key={i} d={`M${x - 9} ${y + 6}L${x - 2} ${y - 7}L${x + 2} ${y - 2}L${x + 5} ${y - 6}L${x + 10} ${y + 6}Z`} className="mountain" vectorEffect="non-scaling-stroke" />
+                <path key={"m" + i} d={`M${x - 4.5} ${y + 3}L${x - 1} ${y - 3.5}L${x + 1} ${y - 1}L${x + 2.5} ${y - 3}L${x + 5} ${y + 3}Z`} className="mountain" vectorEffect="non-scaling-stroke" />
               ))}
             </g>
           )}
@@ -292,7 +295,7 @@ export const MapView = forwardRef<MapHandle, Props>(function MapView({ holders, 
               <text
                 key={t.id}
                 x={t.seat[0]}
-                y={t.seat[1] + (t.tier === "city" ? 20 : 16) * iconScale + labelSize * 0.9}
+                y={t.seat[1] + (t.tier === "city" ? 11 : 9) * iconScale + labelSize * 0.9}
                 textAnchor="middle"
                 fontSize={labelSize}
                 strokeWidth={labelSize * 0.28}

@@ -7,8 +7,8 @@
     "homeFaction": "free-folk",
     "tier": "holdfast",
     "seat": [
-      480,
-      170
+      479.4,
+      183.7
     ],
     "adjacent": [
       "castle-black",
@@ -24,11 +24,10 @@
     "homeFaction": "free-folk",
     "tier": "holdfast",
     "seat": [
-      300,
-      150
+      237.1,
+      105.7
     ],
     "adjacent": [
-      "castle-black",
       "haunted-forest"
     ]
   },
@@ -40,8 +39,8 @@
     "homeFaction": "free-folk",
     "tier": "holdfast",
     "seat": [
-      760,
-      190
+      603.6,
+      179.8
     ],
     "adjacent": [
       "castle-black",
@@ -56,11 +55,10 @@
     "homeFaction": "night-watch",
     "tier": "castle",
     "seat": [
-      520,
-      330
+      532.9,
+      266
     ],
     "adjacent": [
-      "frostfangs",
       "hardhome",
       "haunted-forest",
       "karhold",
@@ -75,8 +73,8 @@
     "homeFaction": "stark",
     "tier": "castle",
     "seat": [
-      560,
-      420
+      547.7,
+      367.7
     ],
     "adjacent": [
       "castle-black",
@@ -94,8 +92,8 @@
     "homeFaction": "stark",
     "tier": "castle",
     "seat": [
-      740,
-      450
+      669.7,
+      420
     ],
     "adjacent": [
       "castle-black",
@@ -111,8 +109,8 @@
     "homeFaction": "stark",
     "tier": "castle",
     "seat": [
-      300,
-      400
+      294.9,
+      346.3
     ],
     "adjacent": [
       "deepwood-motte"
@@ -126,8 +124,8 @@
     "homeFaction": "stark",
     "tier": "castle",
     "seat": [
-      340,
-      560
+      298.9,
+      424
     ],
     "adjacent": [
       "bear-island",
@@ -144,14 +142,15 @@
     "homeFaction": "stark",
     "tier": "fortress",
     "seat": [
-      500,
-      560
+      410.3,
+      502.6
     ],
     "adjacent": [
       "deepwood-motte",
       "dreadfort",
       "last-hearth",
-      "moat-cailin"
+      "moat-cailin",
+      "white-harbor"
     ]
   },
   {
@@ -162,13 +161,12 @@
     "homeFaction": "bolton",
     "tier": "castle",
     "seat": [
-      680,
-      620
+      563.1,
+      481.1
     ],
     "adjacent": [
       "karhold",
       "last-hearth",
-      "moat-cailin",
       "white-harbor",
       "winterfell"
     ]
@@ -181,12 +179,14 @@
     "homeFaction": "stark",
     "tier": "city",
     "seat": [
-      760,
-      760
+      478,
+      652.3
     ],
     "adjacent": [
+      "braavos",
       "dreadfort",
-      "moat-cailin"
+      "moat-cailin",
+      "winterfell"
     ]
   },
   {
@@ -197,12 +197,11 @@
     "homeFaction": "stark",
     "tier": "castle",
     "seat": [
-      520,
-      820
+      417.7,
+      687.1
     ],
     "adjacent": [
       "deepwood-motte",
-      "dreadfort",
       "the-twins",
       "white-harbor",
       "winterfell"
@@ -216,14 +215,12 @@
     "homeFaction": "stark",
     "tier": "castle",
     "seat": [
-      520,
-      920
+      374.3,
+      849.4
     ],
     "adjacent": [
-      "harrenhal",
+      "eyrie",
       "moat-cailin",
-      "riverrun",
-      "runestone",
       "seagard"
     ]
   },
@@ -235,12 +232,12 @@
     "homeFaction": "stark",
     "tier": "castle",
     "seat": [
-      330,
-      960
+      367.7,
+      882.9
     ],
     "adjacent": [
-      "golden-tooth",
-      "pyke",
+      "eyrie",
+      "raventree-hall",
       "riverrun",
       "the-twins"
     ]
@@ -253,15 +250,13 @@
     "homeFaction": "stark",
     "tier": "fortress",
     "seat": [
-      440,
-      1040
+      374.6,
+      991.7
     ],
     "adjacent": [
       "golden-tooth",
-      "harrenhal",
       "raventree-hall",
-      "seagard",
-      "the-twins"
+      "seagard"
     ]
   },
   {
@@ -272,15 +267,15 @@
     "homeFaction": "stark",
     "tier": "castle",
     "seat": [
-      580,
-      1100
+      477.1,
+      1023.4
     ],
     "adjacent": [
       "duskendale",
-      "raventree-hall",
-      "riverrun",
-      "runestone",
-      "the-twins"
+      "eyrie",
+      "goldengrove",
+      "kings-landing",
+      "raventree-hall"
     ]
   },
   {
@@ -291,15 +286,15 @@
     "homeFaction": "stark",
     "tier": "castle",
     "seat": [
-      470,
-      1150
+      445.7,
+      1010.3
     ],
     "adjacent": [
-      "duskendale",
+      "eyrie",
       "golden-tooth",
-      "goldengrove",
       "harrenhal",
-      "riverrun"
+      "riverrun",
+      "seagard"
     ]
   },
   {
@@ -310,13 +305,17 @@
     "homeFaction": "neutral",
     "tier": "fortress",
     "seat": [
-      740,
-      990
+      564,
+      914
     ],
     "adjacent": [
       "gulltown",
+      "harrenhal",
+      "raventree-hall",
       "runestone",
-      "the-fingers"
+      "seagard",
+      "the-fingers",
+      "the-twins"
     ]
   },
   {
@@ -327,13 +326,12 @@
     "homeFaction": "neutral",
     "tier": "castle",
     "seat": [
-      840,
-      1060
+      698.9,
+      933.4
     ],
     "adjacent": [
       "eyrie",
-      "runestone",
-      "the-fingers"
+      "runestone"
     ]
   },
   {
@@ -344,14 +342,13 @@
     "homeFaction": "neutral",
     "tier": "castle",
     "seat": [
-      680,
-      1020
+      707.7,
+      908.3
     ],
     "adjacent": [
       "eyrie",
       "gulltown",
-      "harrenhal",
-      "the-twins"
+      "the-fingers"
     ]
   },
   {
@@ -362,12 +359,12 @@
     "homeFaction": "neutral",
     "tier": "holdfast",
     "seat": [
-      860,
-      940
+      705.7,
+      828.6
     ],
     "adjacent": [
       "eyrie",
-      "gulltown"
+      "runestone"
     ]
   },
   {
@@ -378,13 +375,13 @@
     "homeFaction": "lannister",
     "tier": "fortress",
     "seat": [
-      170,
-      1190
+      204.6,
+      1113.7
     ],
     "adjacent": [
       "ashemark",
       "golden-tooth",
-      "the-crag"
+      "goldengrove"
     ]
   },
   {
@@ -395,17 +392,15 @@
     "homeFaction": "lannister",
     "tier": "castle",
     "seat": [
-      320,
-      1120
+      298.3,
+      1054.3
     ],
     "adjacent": [
       "ashemark",
       "casterly-rock",
       "goldengrove",
       "raventree-hall",
-      "riverrun",
-      "seagard",
-      "the-crag"
+      "riverrun"
     ]
   },
   {
@@ -416,13 +411,13 @@
     "homeFaction": "lannister",
     "tier": "castle",
     "seat": [
-      190,
-      1090
+      234.3,
+      1011.1
     ],
     "adjacent": [
-      "casterly-rock",
-      "golden-tooth",
-      "harlaw"
+      "ashemark",
+      "harlaw",
+      "pyke"
     ]
   },
   {
@@ -433,14 +428,13 @@
     "homeFaction": "lannister",
     "tier": "castle",
     "seat": [
-      260,
-      1260
+      255.4,
+      1033.7
     ],
     "adjacent": [
       "casterly-rock",
       "golden-tooth",
-      "goldengrove",
-      "highgarden"
+      "the-crag"
     ]
   },
   {
@@ -451,12 +445,12 @@
     "homeFaction": "greyjoy",
     "tier": "fortress",
     "seat": [
-      130,
-      960
+      210,
+      946.9
     ],
     "adjacent": [
       "harlaw",
-      "seagard"
+      "the-crag"
     ]
   },
   {
@@ -467,8 +461,8 @@
     "homeFaction": "greyjoy",
     "tier": "castle",
     "seat": [
-      60,
-      1010
+      255.1,
+      916
     ],
     "adjacent": [
       "pyke",
@@ -483,13 +477,16 @@
     "homeFaction": "baratheon",
     "tier": "city",
     "seat": [
-      650,
-      1250
+      539.4,
+      1150
     ],
     "adjacent": [
       "bronzegate",
       "dragonstone",
-      "duskendale"
+      "duskendale",
+      "goldengrove",
+      "harrenhal",
+      "pentos"
     ]
   },
   {
@@ -500,10 +497,11 @@
     "homeFaction": "baratheon",
     "tier": "castle",
     "seat": [
-      800,
-      1210
+      690,
+      1061.4
     ],
     "adjacent": [
+      "duskendale",
       "kings-landing"
     ]
   },
@@ -515,14 +513,14 @@
     "homeFaction": "baratheon",
     "tier": "castle",
     "seat": [
-      600,
-      1180
+      592,
+      1096
     ],
     "adjacent": [
-      "goldengrove",
+      "bronzegate",
+      "dragonstone",
       "harrenhal",
-      "kings-landing",
-      "raventree-hall"
+      "kings-landing"
     ]
   },
   {
@@ -533,14 +531,14 @@
     "homeFaction": "tyrell",
     "tier": "fortress",
     "seat": [
-      380,
-      1380
+      300.3,
+      1342
     ],
     "adjacent": [
-      "ashemark",
       "brightwater-keep",
       "goldengrove",
-      "horn-hill"
+      "horn-hill",
+      "nightsong"
     ]
   },
   {
@@ -551,18 +549,16 @@
     "homeFaction": "tyrell",
     "tier": "castle",
     "seat": [
-      470,
-      1290
+      302.3,
+      1241.7
     ],
     "adjacent": [
-      "ashemark",
-      "brightwater-keep",
       "bronzegate",
-      "duskendale",
+      "casterly-rock",
       "golden-tooth",
+      "harrenhal",
       "highgarden",
-      "nightsong",
-      "raventree-hall"
+      "kings-landing"
     ]
   },
   {
@@ -573,13 +569,15 @@
     "homeFaction": "tyrell",
     "tier": "castle",
     "seat": [
-      320,
-      1480
+      302.9,
+      1389.7
     ],
     "adjacent": [
       "brightwater-keep",
       "highgarden",
-      "oldtown"
+      "nightsong",
+      "oldtown",
+      "starfall"
     ]
   },
   {
@@ -590,12 +588,13 @@
     "homeFaction": "tyrell",
     "tier": "city",
     "seat": [
-      170,
-      1550
+      215.7,
+      1450.6
     ],
     "adjacent": [
       "brightwater-keep",
       "horn-hill",
+      "starfall",
       "the-arbor"
     ]
   },
@@ -607,8 +606,8 @@
     "homeFaction": "tyrell",
     "tier": "castle",
     "seat": [
-      70,
-      1650
+      168.6,
+      1560
     ],
     "adjacent": [
       "oldtown"
@@ -622,18 +621,13 @@
     "homeFaction": "tyrell",
     "tier": "castle",
     "seat": [
-      420,
-      1560
+      220.6,
+      1392
     ],
     "adjacent": [
-      "goldengrove",
-      "hellholt",
       "highgarden",
       "horn-hill",
-      "nightsong",
-      "oldtown",
-      "starfall",
-      "yronwood"
+      "oldtown"
     ]
   },
   {
@@ -644,8 +638,8 @@
     "homeFaction": "baratheon",
     "tier": "fortress",
     "seat": [
-      800,
-      1400
+      643.1,
+      1281.7
     ],
     "adjacent": [
       "bronzegate",
@@ -661,14 +655,15 @@
     "homeFaction": "baratheon",
     "tier": "castle",
     "seat": [
-      700,
-      1330
+      624,
+      1225.7
     ],
     "adjacent": [
+      "duskendale",
       "goldengrove",
       "kings-landing",
-      "nightsong",
-      "storms-end"
+      "storms-end",
+      "tarth"
     ]
   },
   {
@@ -679,15 +674,13 @@
     "homeFaction": "baratheon",
     "tier": "castle",
     "seat": [
-      600,
-      1500
+      383.1,
+      1384.9
     ],
     "adjacent": [
-      "brightwater-keep",
-      "bronzegate",
-      "goldengrove",
+      "highgarden",
+      "horn-hill",
       "storms-end",
-      "sunspear",
       "yronwood"
     ]
   },
@@ -699,10 +692,11 @@
     "homeFaction": "baratheon",
     "tier": "castle",
     "seat": [
-      920,
-      1360
+      702.9,
+      1255.1
     ],
     "adjacent": [
+      "bronzegate",
       "storms-end"
     ]
   },
@@ -714,13 +708,13 @@
     "homeFaction": "martell",
     "tier": "castle",
     "seat": [
-      640,
-      1740
+      476.3,
+      1460.9
     ],
     "adjacent": [
-      "brightwater-keep",
       "hellholt",
       "nightsong",
+      "starfall",
       "sunspear"
     ]
   },
@@ -732,11 +726,11 @@
     "homeFaction": "martell",
     "tier": "fortress",
     "seat": [
-      880,
-      1790
+      696.9,
+      1518
     ],
     "adjacent": [
-      "nightsong",
+      "hellholt",
       "yronwood"
     ]
   },
@@ -748,12 +742,14 @@
     "homeFaction": "martell",
     "tier": "castle",
     "seat": [
-      420,
-      1840
+      321.1,
+      1496.3
     ],
     "adjacent": [
-      "brightwater-keep",
-      "hellholt"
+      "hellholt",
+      "horn-hill",
+      "oldtown",
+      "yronwood"
     ]
   },
   {
@@ -764,13 +760,45 @@
     "homeFaction": "martell",
     "tier": "castle",
     "seat": [
-      540,
-      1840
+      457.1,
+      1524
     ],
     "adjacent": [
-      "brightwater-keep",
       "starfall",
+      "sunspear",
       "yronwood"
+    ]
+  },
+  {
+    "id": "pentos",
+    "name": "Pentos",
+    "seatHouse": "Magisters of Pentos",
+    "region": "the-free-cities",
+    "homeFaction": "targaryen",
+    "tier": "city",
+    "seat": [
+      885.3,
+      1133.1
+    ],
+    "adjacent": [
+      "braavos",
+      "kings-landing"
+    ]
+  },
+  {
+    "id": "braavos",
+    "name": "Braavos",
+    "seatHouse": "Sealord of Braavos",
+    "region": "the-free-cities",
+    "homeFaction": "targaryen",
+    "tier": "city",
+    "seat": [
+      873.8,
+      801.5
+    ],
+    "adjacent": [
+      "pentos",
+      "white-harbor"
     ]
   }
 ]
