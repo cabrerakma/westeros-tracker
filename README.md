@@ -70,3 +70,8 @@ Map geography: *Game of Thrones* shapefiles. Map of Westeros by Tear (Cartograph
 
 - Pentos and Braavos are Free Cities with home faction Targaryen. "Bravos" in the request is spelled "Braavos" here.
 - No turn counter or game rules anywhere; this is a tracker only.
+
+## Next up
+
+- GM editing (change a holder, paint mode, undo/redo, change log, saving in the browser).
+- **Reset button**, to be built together with GM editing and battle logging: it puts the map back to a starting scenario, asks for confirmation first, and downloads a backup of the current state and battle history before clearing anything.
