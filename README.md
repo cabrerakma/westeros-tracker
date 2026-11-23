@@ -1,0 +1,51 @@
+# Westeros Tracker
+
+A browser map of Westeros for tracking which faction holds which of 44 territories in a friends' wargame campaign, with a per-territory battle history. One game master (GM) edits; everyone else watches. Full design: [westeros-map-spec-v2.md](westeros-map-spec-v2.md).
+
+**Status:** M0 (scaffold and data) done. The map itself arrives in M1.
+
+## Run it
+
+Requires Node 20+.
+
+```sh
+npm install
+npm run dev        # start the app
+npm test           # Vitest
+npm run validate   # check the data files
+npm run check-colors   # color-blind / grayscale check of faction colors
+npm run build      # validate + typecheck + static build into dist/
+```
+
+`npm run build` runs `validate` first, so bad data fails the build.
+
+## Data files (all in `src/data`)
+
+| File | What it holds |
+| --- | --- |
+| `factions.json` | The 13 starting factions (id, name, color, glyph). `neutral` ("Unclaimed") is built in and must stay. |
+| `regions.json` | The 11 regions and their label positions. |
+| `territories.json` | The 44 territories: seat, tier, region, home faction, adjacency. |
+| `glyphs.json` | Faction glyphs. **Placeholders for now**; final original art arrives in M4. |
+| `scenarios/*.json` | Starting holders. `war-of-five-kings.json` and `blank.json` ship. |
+| `territories.geo.json` | Territory shapes as SVG paths. Generated in M1, then hand-editable. |
+
+JSON can't hold comments, so the rules live here:
+
+- **Add or recolor a faction:** edit `factions.json` (and the same entry inside each scenario's `factions` list). Colors must be `#RRGGBB`, the glyph must exist in `glyphs.json`.
+- **Home faction vs holder:** a territory's `homeFaction` is its original owner; the holder comes from the scenario. If they differ (and the holder isn't `neutral`) the map shows an "occupied" ring in the home faction's color.
+- **Adjacency** must be symmetric (`validate` checks it). The list in `territories.json` is a hand-written starting point; M1 re-derives land edges from the map shapes and keeps sea links and the Wall by hand.
+- **Add a scenario:** copy `scenarios/blank.json`, give it a new `id`, set every territory's holder, then run `npm run validate`.
+
+## Assumptions and decisions
+
+- Tully and Arryn are not factions. The Riverlands start held by Stark (home faction Stark, so a captured Riverlands territory shows a Stark ring). The Vale starts `neutral`. The Dreadfort's home faction is Bolton.
+- Bolton is light pink (`#F0B8C8`), lightened from the first draft because it matched Stark's luminance.
+- `check-colors` is advisory. Under grayscale some pairs (for example Martell vs Free Folk) look alike by color alone, which is why every faction also has a glyph. No pair fails under red-green simulation at the default threshold.
+- The GM passcode will be hard-coded as `password234` in M5 (front end and database function). Anyone who reads the page's JavaScript can find it, so this stops casual edits only. To change it, edit both places.
+- The hosted site is reachable by anyone with the URL. It ships with `noindex` and `robots.txt` blocking crawlers; share the link only with your group.
+- Dev dependencies are pinned to Vite 5 and Vitest 2 because the installed Node is 20.11. `npm audit` reports advisories about the dev server only; they do not affect the built site.
+
+## Coming later
+
+M1 static map, M2 control and GM mode, M3 GM tools and sharing, M4 battles and polish, M5 live sync (Supabase), hosting and deploy. Supabase setup, keep-alive ping and deploy steps will be added here in M5.

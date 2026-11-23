@@ -1,0 +1,764 @@
+[
+  {
+    "id": "haunted-forest",
+    "name": "Haunted Forest",
+    "seatHouse": "Free Folk",
+    "region": "beyond-the-wall",
+    "homeFaction": "free-folk",
+    "tier": "holdfast",
+    "seat": [
+      480,
+      170
+    ],
+    "adjacent": [
+      "castle-black",
+      "frostfangs",
+      "hardhome"
+    ]
+  },
+  {
+    "id": "frostfangs",
+    "name": "The Frostfangs",
+    "seatHouse": "Free Folk",
+    "region": "beyond-the-wall",
+    "homeFaction": "free-folk",
+    "tier": "holdfast",
+    "seat": [
+      300,
+      150
+    ],
+    "adjacent": [
+      "castle-black",
+      "haunted-forest"
+    ]
+  },
+  {
+    "id": "hardhome",
+    "name": "Hardhome",
+    "seatHouse": "Free Folk",
+    "region": "beyond-the-wall",
+    "homeFaction": "free-folk",
+    "tier": "holdfast",
+    "seat": [
+      760,
+      190
+    ],
+    "adjacent": [
+      "castle-black",
+      "haunted-forest"
+    ]
+  },
+  {
+    "id": "castle-black",
+    "name": "Castle Black",
+    "seatHouse": "Night's Watch",
+    "region": "the-wall",
+    "homeFaction": "night-watch",
+    "tier": "castle",
+    "seat": [
+      520,
+      330
+    ],
+    "adjacent": [
+      "frostfangs",
+      "hardhome",
+      "haunted-forest",
+      "karhold",
+      "last-hearth"
+    ]
+  },
+  {
+    "id": "last-hearth",
+    "name": "The Last Hearth",
+    "seatHouse": "Umber",
+    "region": "the-north",
+    "homeFaction": "stark",
+    "tier": "castle",
+    "seat": [
+      560,
+      420
+    ],
+    "adjacent": [
+      "castle-black",
+      "dreadfort",
+      "karhold",
+      "winterfell"
+    ]
+  },
+  {
+    "id": "karhold",
+    "name": "Karhold",
+    "seatHouse": "Karstark",
+    "region": "the-north",
+    "homeFaction": "stark",
+    "tier": "castle",
+    "seat": [
+      740,
+      450
+    ],
+    "adjacent": [
+      "castle-black",
+      "dreadfort",
+      "last-hearth"
+    ]
+  },
+  {
+    "id": "bear-island",
+    "name": "Bear Island",
+    "seatHouse": "Mormont",
+    "region": "the-north",
+    "homeFaction": "stark",
+    "tier": "castle",
+    "seat": [
+      300,
+      400
+    ],
+    "adjacent": [
+      "deepwood-motte"
+    ]
+  },
+  {
+    "id": "deepwood-motte",
+    "name": "Deepwood Motte",
+    "seatHouse": "Glover",
+    "region": "the-north",
+    "homeFaction": "stark",
+    "tier": "castle",
+    "seat": [
+      340,
+      560
+    ],
+    "adjacent": [
+      "bear-island",
+      "winterfell"
+    ]
+  },
+  {
+    "id": "winterfell",
+    "name": "Winterfell",
+    "seatHouse": "Stark",
+    "region": "the-north",
+    "homeFaction": "stark",
+    "tier": "fortress",
+    "seat": [
+      500,
+      560
+    ],
+    "adjacent": [
+      "deepwood-motte",
+      "dreadfort",
+      "last-hearth",
+      "moat-cailin"
+    ]
+  },
+  {
+    "id": "dreadfort",
+    "name": "The Dreadfort",
+    "seatHouse": "Bolton",
+    "region": "the-north",
+    "homeFaction": "bolton",
+    "tier": "castle",
+    "seat": [
+      680,
+      620
+    ],
+    "adjacent": [
+      "karhold",
+      "last-hearth",
+      "moat-cailin",
+      "white-harbor",
+      "winterfell"
+    ]
+  },
+  {
+    "id": "white-harbor",
+    "name": "White Harbor",
+    "seatHouse": "Manderly",
+    "region": "the-north",
+    "homeFaction": "stark",
+    "tier": "city",
+    "seat": [
+      760,
+      760
+    ],
+    "adjacent": [
+      "dreadfort",
+      "moat-cailin",
+      "the-fingers"
+    ]
+  },
+  {
+    "id": "moat-cailin",
+    "name": "Moat Cailin and the Neck",
+    "seatHouse": "Reed",
+    "region": "the-north",
+    "homeFaction": "stark",
+    "tier": "castle",
+    "seat": [
+      520,
+      820
+    ],
+    "adjacent": [
+      "dreadfort",
+      "the-twins",
+      "white-harbor",
+      "winterfell"
+    ]
+  },
+  {
+    "id": "the-twins",
+    "name": "The Twins",
+    "seatHouse": "Frey",
+    "region": "the-riverlands",
+    "homeFaction": "stark",
+    "tier": "castle",
+    "seat": [
+      520,
+      920
+    ],
+    "adjacent": [
+      "harrenhal",
+      "moat-cailin",
+      "riverrun",
+      "runestone",
+      "seagard"
+    ]
+  },
+  {
+    "id": "seagard",
+    "name": "Seagard",
+    "seatHouse": "Mallister",
+    "region": "the-riverlands",
+    "homeFaction": "stark",
+    "tier": "castle",
+    "seat": [
+      330,
+      960
+    ],
+    "adjacent": [
+      "golden-tooth",
+      "pyke",
+      "riverrun",
+      "the-twins"
+    ]
+  },
+  {
+    "id": "riverrun",
+    "name": "Riverrun",
+    "seatHouse": "Tully",
+    "region": "the-riverlands",
+    "homeFaction": "stark",
+    "tier": "fortress",
+    "seat": [
+      440,
+      1040
+    ],
+    "adjacent": [
+      "golden-tooth",
+      "harrenhal",
+      "raventree-hall",
+      "seagard",
+      "the-twins"
+    ]
+  },
+  {
+    "id": "harrenhal",
+    "name": "Harrenhal",
+    "seatHouse": "Whent (ruin)",
+    "region": "the-riverlands",
+    "homeFaction": "stark",
+    "tier": "castle",
+    "seat": [
+      580,
+      1100
+    ],
+    "adjacent": [
+      "duskendale",
+      "raventree-hall",
+      "riverrun",
+      "runestone",
+      "the-twins"
+    ]
+  },
+  {
+    "id": "raventree-hall",
+    "name": "Raventree Hall",
+    "seatHouse": "Blackwood",
+    "region": "the-riverlands",
+    "homeFaction": "stark",
+    "tier": "castle",
+    "seat": [
+      470,
+      1150
+    ],
+    "adjacent": [
+      "duskendale",
+      "golden-tooth",
+      "goldengrove",
+      "harrenhal",
+      "riverrun"
+    ]
+  },
+  {
+    "id": "eyrie",
+    "name": "The Eyrie",
+    "seatHouse": "Arryn",
+    "region": "the-vale",
+    "homeFaction": "neutral",
+    "tier": "fortress",
+    "seat": [
+      740,
+      990
+    ],
+    "adjacent": [
+      "gulltown",
+      "runestone",
+      "the-fingers"
+    ]
+  },
+  {
+    "id": "gulltown",
+    "name": "Gulltown",
+    "seatHouse": "Grafton",
+    "region": "the-vale",
+    "homeFaction": "neutral",
+    "tier": "castle",
+    "seat": [
+      840,
+      1060
+    ],
+    "adjacent": [
+      "eyrie",
+      "runestone",
+      "the-fingers"
+    ]
+  },
+  {
+    "id": "runestone",
+    "name": "Runestone",
+    "seatHouse": "Royce",
+    "region": "the-vale",
+    "homeFaction": "neutral",
+    "tier": "castle",
+    "seat": [
+      680,
+      1020
+    ],
+    "adjacent": [
+      "eyrie",
+      "gulltown",
+      "harrenhal",
+      "the-twins"
+    ]
+  },
+  {
+    "id": "the-fingers",
+    "name": "The Fingers",
+    "seatHouse": "Baelish",
+    "region": "the-vale",
+    "homeFaction": "neutral",
+    "tier": "holdfast",
+    "seat": [
+      860,
+      940
+    ],
+    "adjacent": [
+      "eyrie",
+      "gulltown",
+      "white-harbor"
+    ]
+  },
+  {
+    "id": "casterly-rock",
+    "name": "Casterly Rock",
+    "seatHouse": "Lannister",
+    "region": "the-westerlands",
+    "homeFaction": "lannister",
+    "tier": "fortress",
+    "seat": [
+      170,
+      1190
+    ],
+    "adjacent": [
+      "ashemark",
+      "golden-tooth",
+      "the-crag"
+    ]
+  },
+  {
+    "id": "golden-tooth",
+    "name": "The Golden Tooth",
+    "seatHouse": "Lefford",
+    "region": "the-westerlands",
+    "homeFaction": "lannister",
+    "tier": "castle",
+    "seat": [
+      320,
+      1120
+    ],
+    "adjacent": [
+      "ashemark",
+      "casterly-rock",
+      "raventree-hall",
+      "riverrun",
+      "seagard",
+      "the-crag"
+    ]
+  },
+  {
+    "id": "the-crag",
+    "name": "The Crag",
+    "seatHouse": "Westerling",
+    "region": "the-westerlands",
+    "homeFaction": "lannister",
+    "tier": "castle",
+    "seat": [
+      190,
+      1090
+    ],
+    "adjacent": [
+      "casterly-rock",
+      "golden-tooth",
+      "harlaw"
+    ]
+  },
+  {
+    "id": "ashemark",
+    "name": "Ashemark",
+    "seatHouse": "Marbrand",
+    "region": "the-westerlands",
+    "homeFaction": "lannister",
+    "tier": "castle",
+    "seat": [
+      260,
+      1260
+    ],
+    "adjacent": [
+      "casterly-rock",
+      "golden-tooth",
+      "highgarden"
+    ]
+  },
+  {
+    "id": "pyke",
+    "name": "Pyke",
+    "seatHouse": "Greyjoy",
+    "region": "the-iron-islands",
+    "homeFaction": "greyjoy",
+    "tier": "fortress",
+    "seat": [
+      130,
+      960
+    ],
+    "adjacent": [
+      "harlaw",
+      "seagard"
+    ]
+  },
+  {
+    "id": "harlaw",
+    "name": "Harlaw",
+    "seatHouse": "Harlaw",
+    "region": "the-iron-islands",
+    "homeFaction": "greyjoy",
+    "tier": "castle",
+    "seat": [
+      60,
+      1010
+    ],
+    "adjacent": [
+      "pyke",
+      "the-crag"
+    ]
+  },
+  {
+    "id": "kings-landing",
+    "name": "King's Landing",
+    "seatHouse": "The Crown",
+    "region": "the-crownlands",
+    "homeFaction": "baratheon",
+    "tier": "city",
+    "seat": [
+      650,
+      1250
+    ],
+    "adjacent": [
+      "bronzegate",
+      "dragonstone",
+      "duskendale",
+      "goldengrove"
+    ]
+  },
+  {
+    "id": "dragonstone",
+    "name": "Dragonstone",
+    "seatHouse": "Targaryen (historic)",
+    "region": "the-crownlands",
+    "homeFaction": "baratheon",
+    "tier": "castle",
+    "seat": [
+      800,
+      1210
+    ],
+    "adjacent": [
+      "kings-landing"
+    ]
+  },
+  {
+    "id": "duskendale",
+    "name": "Duskendale",
+    "seatHouse": "Darklyn",
+    "region": "the-crownlands",
+    "homeFaction": "baratheon",
+    "tier": "castle",
+    "seat": [
+      600,
+      1180
+    ],
+    "adjacent": [
+      "harrenhal",
+      "kings-landing",
+      "raventree-hall"
+    ]
+  },
+  {
+    "id": "highgarden",
+    "name": "Highgarden",
+    "seatHouse": "Tyrell",
+    "region": "the-reach",
+    "homeFaction": "tyrell",
+    "tier": "fortress",
+    "seat": [
+      380,
+      1380
+    ],
+    "adjacent": [
+      "ashemark",
+      "brightwater-keep",
+      "goldengrove",
+      "horn-hill"
+    ]
+  },
+  {
+    "id": "goldengrove",
+    "name": "Goldengrove",
+    "seatHouse": "Rowan",
+    "region": "the-reach",
+    "homeFaction": "tyrell",
+    "tier": "castle",
+    "seat": [
+      470,
+      1290
+    ],
+    "adjacent": [
+      "bronzegate",
+      "highgarden",
+      "kings-landing",
+      "nightsong",
+      "raventree-hall"
+    ]
+  },
+  {
+    "id": "horn-hill",
+    "name": "Horn Hill",
+    "seatHouse": "Tarly",
+    "region": "the-reach",
+    "homeFaction": "tyrell",
+    "tier": "castle",
+    "seat": [
+      320,
+      1480
+    ],
+    "adjacent": [
+      "brightwater-keep",
+      "highgarden",
+      "oldtown"
+    ]
+  },
+  {
+    "id": "oldtown",
+    "name": "Oldtown",
+    "seatHouse": "Hightower",
+    "region": "the-reach",
+    "homeFaction": "tyrell",
+    "tier": "city",
+    "seat": [
+      170,
+      1550
+    ],
+    "adjacent": [
+      "horn-hill",
+      "the-arbor"
+    ]
+  },
+  {
+    "id": "the-arbor",
+    "name": "The Arbor",
+    "seatHouse": "Redwyne",
+    "region": "the-reach",
+    "homeFaction": "tyrell",
+    "tier": "castle",
+    "seat": [
+      70,
+      1650
+    ],
+    "adjacent": [
+      "oldtown"
+    ]
+  },
+  {
+    "id": "brightwater-keep",
+    "name": "Brightwater Keep",
+    "seatHouse": "Florent",
+    "region": "the-reach",
+    "homeFaction": "tyrell",
+    "tier": "castle",
+    "seat": [
+      420,
+      1560
+    ],
+    "adjacent": [
+      "highgarden",
+      "horn-hill",
+      "nightsong",
+      "starfall",
+      "yronwood"
+    ]
+  },
+  {
+    "id": "storms-end",
+    "name": "Storm's End",
+    "seatHouse": "Baratheon",
+    "region": "the-stormlands",
+    "homeFaction": "baratheon",
+    "tier": "fortress",
+    "seat": [
+      800,
+      1400
+    ],
+    "adjacent": [
+      "bronzegate",
+      "nightsong",
+      "tarth"
+    ]
+  },
+  {
+    "id": "bronzegate",
+    "name": "Bronzegate",
+    "seatHouse": "Buckwell",
+    "region": "the-stormlands",
+    "homeFaction": "baratheon",
+    "tier": "castle",
+    "seat": [
+      700,
+      1330
+    ],
+    "adjacent": [
+      "goldengrove",
+      "kings-landing",
+      "nightsong",
+      "storms-end"
+    ]
+  },
+  {
+    "id": "nightsong",
+    "name": "Nightsong",
+    "seatHouse": "Caron",
+    "region": "the-stormlands",
+    "homeFaction": "baratheon",
+    "tier": "castle",
+    "seat": [
+      600,
+      1500
+    ],
+    "adjacent": [
+      "brightwater-keep",
+      "bronzegate",
+      "goldengrove",
+      "storms-end",
+      "yronwood"
+    ]
+  },
+  {
+    "id": "tarth",
+    "name": "Tarth (Evenfall Hall)",
+    "seatHouse": "Tarth",
+    "region": "the-stormlands",
+    "homeFaction": "baratheon",
+    "tier": "castle",
+    "seat": [
+      920,
+      1360
+    ],
+    "adjacent": [
+      "storms-end"
+    ]
+  },
+  {
+    "id": "yronwood",
+    "name": "Yronwood",
+    "seatHouse": "Yronwood",
+    "region": "dorne",
+    "homeFaction": "martell",
+    "tier": "castle",
+    "seat": [
+      640,
+      1740
+    ],
+    "adjacent": [
+      "brightwater-keep",
+      "hellholt",
+      "nightsong",
+      "starfall",
+      "sunspear"
+    ]
+  },
+  {
+    "id": "sunspear",
+    "name": "Sunspear",
+    "seatHouse": "Martell",
+    "region": "dorne",
+    "homeFaction": "martell",
+    "tier": "fortress",
+    "seat": [
+      880,
+      1790
+    ],
+    "adjacent": [
+      "yronwood"
+    ]
+  },
+  {
+    "id": "starfall",
+    "name": "Starfall",
+    "seatHouse": "Dayne",
+    "region": "dorne",
+    "homeFaction": "martell",
+    "tier": "castle",
+    "seat": [
+      420,
+      1840
+    ],
+    "adjacent": [
+      "brightwater-keep",
+      "hellholt",
+      "yronwood"
+    ]
+  },
+  {
+    "id": "hellholt",
+    "name": "Hellholt",
+    "seatHouse": "Uller",
+    "region": "dorne",
+    "homeFaction": "martell",
+    "tier": "castle",
+    "seat": [
+      540,
+      1840
+    ],
+    "adjacent": [
+      "starfall",
+      "yronwood"
+    ]
+  }
+]

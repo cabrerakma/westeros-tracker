@@ -1,0 +1,90 @@
+[
+  {
+    "id": "beyond-the-wall",
+    "name": "Beyond the Wall",
+    "labelPos": [
+      500,
+      110
+    ]
+  },
+  {
+    "id": "the-wall",
+    "name": "The Wall",
+    "labelPos": [
+      520,
+      290
+    ]
+  },
+  {
+    "id": "the-north",
+    "name": "The North",
+    "labelPos": [
+      520,
+      510
+    ]
+  },
+  {
+    "id": "the-riverlands",
+    "name": "The Riverlands",
+    "labelPos": [
+      450,
+      990
+    ]
+  },
+  {
+    "id": "the-vale",
+    "name": "The Vale",
+    "labelPos": [
+      770,
+      1010
+    ]
+  },
+  {
+    "id": "the-westerlands",
+    "name": "The Westerlands",
+    "labelPos": [
+      220,
+      1170
+    ]
+  },
+  {
+    "id": "the-iron-islands",
+    "name": "The Iron Islands",
+    "labelPos": [
+      95,
+      900
+    ]
+  },
+  {
+    "id": "the-crownlands",
+    "name": "The Crownlands",
+    "labelPos": [
+      680,
+      1190
+    ]
+  },
+  {
+    "id": "the-reach",
+    "name": "The Reach",
+    "labelPos": [
+      320,
+      1430
+    ]
+  },
+  {
+    "id": "the-stormlands",
+    "name": "The Stormlands",
+    "labelPos": [
+      740,
+      1440
+    ]
+  },
+  {
+    "id": "dorne",
+    "name": "Dorne",
+    "labelPos": [
+      610,
+      1800
+    ]
+  }
+]

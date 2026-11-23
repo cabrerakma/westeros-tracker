@@ -1,0 +1,232 @@
+{
+  "id": "blank",
+  "name": "Blank (everything unclaimed)",
+  "turn": 1,
+  "factions": [
+    {
+      "id": "stark",
+      "name": "House Stark",
+      "color": "#8FA3B0",
+      "glyph": "wolf",
+      "isPlayer": true
+    },
+    {
+      "id": "lannister",
+      "name": "House Lannister",
+      "color": "#B3261E",
+      "glyph": "lion",
+      "isPlayer": true
+    },
+    {
+      "id": "baratheon",
+      "name": "House Baratheon",
+      "color": "#E0B020",
+      "glyph": "stag",
+      "isPlayer": true
+    },
+    {
+      "id": "targaryen",
+      "name": "House Targaryen",
+      "color": "#6A1B4D",
+      "glyph": "dragon",
+      "isPlayer": true
+    },
+    {
+      "id": "greyjoy",
+      "name": "House Greyjoy",
+      "color": "#1E3A4C",
+      "glyph": "kraken",
+      "isPlayer": true
+    },
+    {
+      "id": "tyrell",
+      "name": "House Tyrell",
+      "color": "#3E8E3E",
+      "glyph": "rose",
+      "isPlayer": true
+    },
+    {
+      "id": "martell",
+      "name": "House Martell",
+      "color": "#E4731C",
+      "glyph": "sun-spear",
+      "isPlayer": true
+    },
+    {
+      "id": "night-watch",
+      "name": "Night's Watch",
+      "color": "#2B2B2B",
+      "glyph": "crossed-swords",
+      "isPlayer": false
+    },
+    {
+      "id": "free-folk",
+      "name": "Free Folk",
+      "color": "#A58B5B",
+      "glyph": "horned-skull",
+      "isPlayer": false
+    },
+    {
+      "id": "bolton",
+      "name": "House Bolton",
+      "color": "#F0B8C8",
+      "glyph": "flayed-man",
+      "isPlayer": false
+    },
+    {
+      "id": "brotherhood",
+      "name": "Brotherhood without Banners",
+      "color": "#6B4A2B",
+      "glyph": "flaming-sword",
+      "isPlayer": false
+    },
+    {
+      "id": "mercenaries",
+      "name": "Neutrals (Mercenaries)",
+      "color": "#7C7C3A",
+      "glyph": "coin-dagger",
+      "isPlayer": false
+    },
+    {
+      "id": "neutral",
+      "name": "Unclaimed",
+      "color": "#E8DCC0",
+      "glyph": "none",
+      "isPlayer": false
+    }
+  ],
+  "territories": {
+    "haunted-forest": {
+      "holder": "neutral"
+    },
+    "frostfangs": {
+      "holder": "neutral"
+    },
+    "hardhome": {
+      "holder": "neutral"
+    },
+    "castle-black": {
+      "holder": "neutral"
+    },
+    "last-hearth": {
+      "holder": "neutral"
+    },
+    "karhold": {
+      "holder": "neutral"
+    },
+    "bear-island": {
+      "holder": "neutral"
+    },
+    "deepwood-motte": {
+      "holder": "neutral"
+    },
+    "winterfell": {
+      "holder": "neutral"
+    },
+    "dreadfort": {
+      "holder": "neutral"
+    },
+    "white-harbor": {
+      "holder": "neutral"
+    },
+    "moat-cailin": {
+      "holder": "neutral"
+    },
+    "the-twins": {
+      "holder": "neutral"
+    },
+    "seagard": {
+      "holder": "neutral"
+    },
+    "riverrun": {
+      "holder": "neutral"
+    },
+    "harrenhal": {
+      "holder": "neutral"
+    },
+    "raventree-hall": {
+      "holder": "neutral"
+    },
+    "eyrie": {
+      "holder": "neutral"
+    },
+    "gulltown": {
+      "holder": "neutral"
+    },
+    "runestone": {
+      "holder": "neutral"
+    },
+    "the-fingers": {
+      "holder": "neutral"
+    },
+    "casterly-rock": {
+      "holder": "neutral"
+    },
+    "golden-tooth": {
+      "holder": "neutral"
+    },
+    "the-crag": {
+      "holder": "neutral"
+    },
+    "ashemark": {
+      "holder": "neutral"
+    },
+    "pyke": {
+      "holder": "neutral"
+    },
+    "harlaw": {
+      "holder": "neutral"
+    },
+    "kings-landing": {
+      "holder": "neutral"
+    },
+    "dragonstone": {
+      "holder": "neutral"
+    },
+    "duskendale": {
+      "holder": "neutral"
+    },
+    "highgarden": {
+      "holder": "neutral"
+    },
+    "goldengrove": {
+      "holder": "neutral"
+    },
+    "horn-hill": {
+      "holder": "neutral"
+    },
+    "oldtown": {
+      "holder": "neutral"
+    },
+    "the-arbor": {
+      "holder": "neutral"
+    },
+    "brightwater-keep": {
+      "holder": "neutral"
+    },
+    "storms-end": {
+      "holder": "neutral"
+    },
+    "bronzegate": {
+      "holder": "neutral"
+    },
+    "nightsong": {
+      "holder": "neutral"
+    },
+    "tarth": {
+      "holder": "neutral"
+    },
+    "yronwood": {
+      "holder": "neutral"
+    },
+    "sunspear": {
+      "holder": "neutral"
+    },
+    "starfall": {
+      "holder": "neutral"
+    },
+    "hellholt": {
+      "holder": "neutral"
+    }
+  }
+}

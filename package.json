@@ -1,0 +1,33 @@
+{
+  "name": "westeros-tracker",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "npm run validate && tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "validate": "node scripts/validate-data.mjs",
+    "check-colors": "node scripts/check-colors.mjs",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "d3-selection": "^3.0.1",
+    "d3-zoom": "^3.0.1",
+    "lz-string": "^1.5.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/d3-delaunay": "^6.0.4",
+    "@types/d3-selection": "^3.0.12",
+    "@types/d3-zoom": "^3.0.9",
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
+    "@vitejs/plugin-react": "^4.7.0",
+    "d3-delaunay": "^6.0.6",
+    "typescript": "^5.9.3",
+    "vite": "^5.4.21",
+    "vitest": "^2.1.9"
+  }
+}
