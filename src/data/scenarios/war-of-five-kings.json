@@ -177,13 +177,13 @@
       "holder": "greyjoy"
     },
     "kings-landing": {
-      "holder": "baratheon"
+      "holder": "lannister"
     },
     "dragonstone": {
       "holder": "baratheon"
     },
     "duskendale": {
-      "holder": "baratheon"
+      "holder": "lannister"
     },
     "highgarden": {
       "holder": "tyrell"
@@ -204,16 +204,16 @@
       "holder": "tyrell"
     },
     "storms-end": {
-      "holder": "baratheon"
+      "holder": "tyrell"
     },
     "bronzegate": {
-      "holder": "baratheon"
+      "holder": "tyrell"
     },
     "nightsong": {
       "holder": "tyrell"
     },
     "tarth": {
-      "holder": "baratheon"
+      "holder": "tyrell"
     },
     "yronwood": {
       "holder": "martell"

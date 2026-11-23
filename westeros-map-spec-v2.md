@@ -6,7 +6,7 @@ Revised Nov 24, 2026. Supersedes `westeros-map-spec.md`. This version cuts the r
 > - **Real map.** The geography now comes from the Game of Thrones shapefiles (map by Tear and theMountainGoat, GIS data by cadaei, revised by Patrick Triest; CC BY-NC-SA 3.0, non-commercial, credit required). The "original art" rule is lifted by the owner for this private project. The hand-drawn region polygons and the seed coordinates in section 4 are replaced by the real castle positions; section 3's build method is now: real region polygons, then Voronoi per region.
 > - **46 territories, 12 regions.** Pentos and Braavos are added as a new region, The Free Cities, a strip of the Essos west coast. Targaryen starts holding both (home faction Targaryen). Targaryen therefore starts with 2 territories, not 0.
 > - **No turns and no game mechanics.** Drop the turn counter, season label, turn numbers in the log, battles, exports and scenarios. Battles keep a date instead. The map only records who holds what, plus a simple history of fights per territory (who fought, who won, players, notes). Capturing may offer to update the holder, nothing more.
-> - **Nightsong starts held by Tyrell** (Lord Caron fought for Renly). Its home faction stays Baratheon, so it shows the occupied ring. The map is used alongside the A Song of Ice and Fire miniatures game, so it only tracks who holds what.
+> - **Starting holders follow the A Song of Ice and Fire miniatures game:** Joffrey's King's Landing and Duskendale are Lannister, Renly's Stormlands (Storm's End, Bronzegate, Tarth, Nightsong) are Tyrell, and Baratheon (Stannis) starts with Dragonstone only. Home factions stay Baratheon for these, so they show the occupied ring. This overrides the default-holder column in section 3. The map only tracks who holds what.
 > - **Simplest option wins.** Where this spec is ambiguous, build the smaller thing.
 
 ## 1. Overview
@@ -106,11 +106,11 @@ Portrait SVG, `viewBox="0 0 1000 2000"`, north at top, the Wall about one-sixth 
 | ID | Faction | Suggested color | Glyph (original, simple) | Starts with |
 | --- | --- | --- | --- | --- |
 | stark | House Stark | #8FA3B0 slate grey | wolf head | North (7) + Riverlands (5) |
-| lannister | House Lannister | #B3261E crimson | lion head | Westerlands (4) |
-| baratheon | House Baratheon | #E0B020 gold | stag head | Stormlands (3, without Nightsong) + Crownlands (3) = 6 |
+| lannister | House Lannister | #B3261E crimson | lion head | Westerlands (4) + King's Landing + Duskendale (6) |
+| baratheon | House Baratheon | #E0B020 gold | stag head | Dragonstone only (1); this is Stannis's side |
 | targaryen | House Targaryen | #6A1B4D plum | three-headed dragon | Nothing |
 | greyjoy | House Greyjoy | #1E3A4C deep teal | kraken | Iron Islands (2) |
-| tyrell | House Tyrell | #3E8E3E green | rose | The Reach (6) + Nightsong (7) |
+| tyrell | House Tyrell | #3E8E3E green | rose | The Reach (6) + the Stormlands (4) = 10; the Stormlands follow Renly |
 | martell | House Martell | #E4731C orange | sun and spear | Dorne (4) |
 | night-watch | Night's Watch | #2B2B2B near-black | crossed swords | The Wall (1) |
 | free-folk | Free Folk | #A58B5B tan | horned skull | Beyond the Wall (3) |
