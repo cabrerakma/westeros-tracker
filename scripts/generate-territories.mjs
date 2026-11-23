@@ -464,7 +464,16 @@ for (const t of territories) {
 }
 
 // ---------------------------------------------------------------- decor
-const lakes = src.lakes.map((l) => multiPath(projMulti(l.poly)));
+// Lakes: skip any that touch the northern crop line (they would look like cut-off islands at the map
+// edge) and clip the rest to land.
+const landAll = union([...Object.values(regionPolys), sceneryPolys].filter((m) => m.length));
+const lakes = src.lakes
+  .map((l) => projMulti(l.poly))
+  .filter((mp) => bboxOf(mp)[1] > PAD + 3)
+  .map((mp) => polygonClipping.intersection(mp, landAll))
+  .map((mp) => dropTiny(mp, 40)) // thin slivers look like stray lines
+  .filter((mp) => mp.length)
+  .map(multiPath);
 const roads = src.roads.map((r) => ({ name: r.name, size: r.size, d: linePath(r.line.map(proj)) }));
 // ---------------------------------------------------------------- region labels
 const labels = {};
