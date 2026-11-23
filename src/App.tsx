@@ -2,6 +2,7 @@ import { useMemo, useRef, useState } from "react";
 import { DEFAULT_SCENARIO_ID, REGIONS, SCENARIOS, TERRITORIES } from "./data";
 import { MapView, type Layers, type MapHandle } from "./map/MapView";
 import { controlState } from "./state/status";
+import { Legend } from "./ui/Legend";
 
 const LAYER_LABELS: [keyof Layers, string][] = [
   ["regionBorders", "Region borders"],
@@ -48,6 +49,7 @@ export function App() {
         <MapView ref={map} holders={holders} factions={factions} selectedId={selectedId} onSelect={setSelectedId} layers={layers} />
         {sidebarOpen && (
           <aside className="sidebar">
+            <Legend factions={factions} holders={holders} />
             {selected ? (
               <section>
                 <h2>{selected.name}</h2>
@@ -79,7 +81,7 @@ export function App() {
               <section>
                 <h2>Westeros</h2>
                 <p>Click a territory to see its details. Drag to pan, scroll or pinch to zoom.</p>
-                <p className="muted">M1: static map. Control, banners and the GM tools arrive in M2.</p>
+                <p className="muted">Colours show who holds each territory. Editing arrives next.</p>
               </section>
             )}
           </aside>

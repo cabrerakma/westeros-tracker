@@ -49,7 +49,7 @@ button.link { border: none; background: none; color: var(--accent); text-decorat
 .river.big { stroke-width: 1.8; }
 .road { fill: none; stroke: #8a7350; stroke-width: 1.1; stroke-dasharray: 4 4; opacity: 0.7; }
 .mountain { fill: #bfb394; stroke: #6f6247; stroke-width: 0.7; opacity: 0.85; }
-.region-name { font-family: var(--font-display); font-weight: 600; fill: #4a3a26; }
+.region-name { font-family: var(--font-display); font-weight: 600; fill: #3a2c1a; paint-order: stroke; stroke: rgba(244, 236, 214, 0.75); stroke-width: 3px; stroke-linejoin: round; }
 .region-caption { font-family: var(--font-body); fill: #2f2415; paint-order: stroke; stroke: rgba(244, 236, 214, 0.8); stroke-width: 3px; }
 .castle { fill: #3b2f20; stroke: #f4ecd6; stroke-width: 1.2; stroke-linejoin: round; }
 .castle .cren { stroke: #3b2f20; stroke-width: 2; fill: none; stroke-dasharray: 2.2 1.6; }
@@ -67,3 +67,16 @@ button.link { border: none; background: none; color: var(--accent); text-decorat
   .topbar, .sidebar { display: none; }
   .map-wrap { background: none; }
 }
+
+/* colour key */
+.legend { margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid #cdbf9c; }
+.legend ul { list-style: none; margin: 0; padding: 0; }
+.legend-row { display: flex; align-items: center; gap: 8px; width: 100%; padding: 3px 4px; border: none; background: none; text-align: left; border-radius: 4px; }
+.legend-row.static { cursor: default; }
+button.legend-row:hover { background: #fff6dc; }
+.legend-name { flex: 1; }
+.legend-count { color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+.swatch { display: inline-block; width: 18px; height: 18px; border: 1px solid #5a4a33; border-radius: 3px; flex: none; }
+.swatch.hatch { background: repeating-linear-gradient(45deg, #efe4c8 0 3px, #8f8a7c 3px 4.6px); }
+.swatch.ring { width: 12px; height: 12px; vertical-align: -2px; background: #efe4c8; box-shadow: inset 0 0 0 3px #3e8e3e; margin-right: 4px; }
+.small { font-size: 13px; margin: 6px 0 0; }

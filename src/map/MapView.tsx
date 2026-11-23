@@ -8,6 +8,7 @@ import { controlState } from "../state/status";
 import { regionSummary } from "../state/status";
 import { LAKES, MOUNTAINS, REGION_PATHS, RIVERS, ROADS, SCENERY, SEA_LINKS, TERRITORY_PATHS, VIEWBOX } from "./geo";
 import { CastleIcon } from "./CastleIcon";
+import { holderFill } from "./colors";
 
 export interface Layers {
   regionBorders: boolean;
@@ -28,31 +29,6 @@ interface Props {
   selectedId: string | null;
   onSelect(id: string | null): void;
   layers: Layers;
-}
-
-const REGION_TINT: Record<string, string> = {
-  "beyond-the-wall": "#e4e8e6",
-  "the-wall": "#bcc6cc",
-  "the-north": "#cfd3c6",
-  "the-vale": "#d9d0bd",
-  "the-riverlands": "#d6cfa9",
-  "the-westerlands": "#dcc3a0",
-  "the-iron-islands": "#c4c9c0",
-  "the-crownlands": "#dbc2b0",
-  "the-reach": "#cfdab0",
-  "the-stormlands": "#d9d6a8",
-  dorne: "#e3c99a",
-  "the-free-cities": "#d6cfdc",
-};
-
-function lighten(hex: string, amount: number): string {
-  const n = parseInt(hex.slice(1), 16);
-  const ch = (v: number) => Math.round(v + (255 - v) * amount);
-  return `rgb(${ch((n >> 16) & 255)},${ch((n >> 8) & 255)},${ch(n & 255)})`;
-}
-function tintFor(t: Territory, index: number): string {
-  // A little variation inside a region so neighbours read as separate shapes.
-  return lighten(REGION_TINT[t.region] ?? "#ddd", [0, 0.1, 0.04, 0.14, 0.07][index % 5]);
 }
 
 interface ShapeProps {
@@ -153,16 +129,26 @@ export const MapView = forwardRef<MapHandle, Props>(function MapView({ holders, 
   }, []);
   const onSelectCb = useCallback((id: string) => onSelect(id), [onSelect]);
 
-  // Per-territory tint by index within its region (stable).
+  // Fill = holder's colour over parchment; unclaimed land gets the grey hatch.
   const fills = useMemo(() => {
-    const idx: Record<string, number> = {};
     const out: Record<string, string> = {};
     for (const t of TERRITORIES) {
-      idx[t.region] = (idx[t.region] ?? -1) + 1;
-      out[t.id] = tintFor(t, idx[t.region]);
+      const holder = holders[t.id];
+      const f = factionById[holder];
+      out[t.id] = holder === "neutral" || !f ? "url(#hatch)" : holderFill(f.color);
     }
     return out;
-  }, []);
+  }, [holders, factionById]);
+
+  // Occupied: held by someone other than the home faction (and not unclaimed). Ring uses the home colour.
+  const occupied = useMemo(
+    () =>
+      TERRITORIES.filter((t) => controlState(holders[t.id], t.homeFaction) === "occupied" && factionById[t.homeFaction]).map((t) => ({
+        id: t.id,
+        color: factionById[t.homeFaction].color,
+      })),
+    [holders, factionById],
+  );
 
   const iconScale = 1 / Math.pow(k, 0.55);
   const labelPx = 12.5; // castle label size in screen pixels
@@ -186,6 +172,15 @@ export const MapView = forwardRef<MapHandle, Props>(function MapView({ holders, 
             <stop offset="0%" stopColor="#b9c9d0" />
             <stop offset="100%" stopColor="#9fb2bb" />
           </radialGradient>
+          <pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <rect width="7" height="7" fill="#efe4c8" />
+            <line x1="0" y1="0" x2="0" y2="7" stroke="#8f8a7c" strokeWidth="1.6" />
+          </pattern>
+          {occupied.map((o) => (
+            <clipPath key={o.id} id={`clip-${o.id}`}>
+              <path d={TERRITORY_PATHS[o.id]} />
+            </clipPath>
+          ))}
         </defs>
         <rect x={-2000} y={-2000} width={5000} height={6000} fill="url(#ocean)" onClick={() => onSelect(null)} />
         <g ref={gRef}>
@@ -222,6 +217,13 @@ export const MapView = forwardRef<MapHandle, Props>(function MapView({ holders, 
                 onSelect={onSelectCb}
                 onHover={onHover}
               />
+            ))}
+          </g>
+
+          {/* occupied rings: a band in the home faction's colour just inside the border */}
+          <g pointerEvents="none">
+            {occupied.map((o) => (
+              <path key={o.id} d={TERRITORY_PATHS[o.id]} clipPath={`url(#clip-${o.id})`} fill="none" stroke={o.color} strokeWidth={7} vectorEffect="non-scaling-stroke" strokeLinejoin="round" />
             ))}
           </g>
 
