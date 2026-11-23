@@ -18,4 +18,6 @@ export const ROADS = geo._roads as { name: string | null; size: number; d: strin
 export const MOUNTAINS = geo._mountains as [number, number][];
 /** Land that belongs to no territory (Skagos): drawn, not selectable. */
 export const SCENERY = geo._scenery as string;
+/** Names for scenery regions (the Vale). */
+export const SCENERY_LABELS = geo._sceneryLabels as { name: string; pos: [number, number]; size: number }[];
 export const WALL_LINE = geo._wall as string;

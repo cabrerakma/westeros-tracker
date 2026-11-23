@@ -6,7 +6,7 @@ import { REGIONS, TERRITORIES } from "../data";
 import type { Faction, FactionId, Territory } from "../types";
 import { controlState } from "../state/status";
 import { regionSummary } from "../state/status";
-import { LAKES, MOUNTAINS, REGION_PATHS, RIVERS, ROADS, SCENERY, SEA_LINKS, TERRITORY_PATHS, VIEWBOX } from "./geo";
+import { LAKES, MOUNTAINS, REGION_PATHS, RIVERS, ROADS, SCENERY, SCENERY_LABELS, SEA_LINKS, TERRITORY_PATHS, VIEWBOX } from "./geo";
 import { CastleIcon } from "./CastleIcon";
 import { holderFill } from "./colors";
 
@@ -189,6 +189,7 @@ export const MapView = forwardRef<MapHandle, Props>(function MapView({ holders, 
             {Object.values(REGION_PATHS).map((d, i) => (
               <path key={i} d={d} fill="#c3d2d8" stroke="#c3d2d8" strokeWidth={22} strokeLinejoin="round" />
             ))}
+            <path d={SCENERY} fill="#c3d2d8" stroke="#c3d2d8" strokeWidth={22} strokeLinejoin="round" />
           </g>
 
           {/* sea links for islands */}
@@ -263,6 +264,13 @@ export const MapView = forwardRef<MapHandle, Props>(function MapView({ holders, 
 
           {/* region names and captions */}
           <g pointerEvents="none" className="region-labels">
+            {layers.regionNames &&
+              regionFade > 0 &&
+              SCENERY_LABELS.map((l) => (
+                <text key={l.name} x={l.pos[0]} y={l.pos[1]} textAnchor="middle" className="region-name" fontSize={l.size} letterSpacing={l.size * 0.22} opacity={regionFade * 0.45}>
+                  {l.name}
+                </text>
+              ))}
             {REGIONS.map((r) => {
               const size = r.labelSize ?? 32;
               const [x, y] = r.labelPos;

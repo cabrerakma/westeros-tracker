@@ -7,6 +7,7 @@ Revised Nov 24, 2026. Supersedes `westeros-map-spec.md`. This version cuts the r
 > - **46 territories, 12 regions.** Pentos and Braavos are added as a new region, The Free Cities, a strip of the Essos west coast. Targaryen starts holding both (home faction Targaryen). Targaryen therefore starts with 2 territories, not 0.
 > - **No turns and no game mechanics.** Drop the turn counter, season label, turn numbers in the log, battles, exports and scenarios. Battles keep a date instead. The map only records who holds what, plus a simple history of fights per territory (who fought, who won, players, notes). Capturing may offer to update the holder, nothing more.
 > - **Starting holders follow the A Song of Ice and Fire miniatures game:** Joffrey's King's Landing and Duskendale are Lannister, Renly's Stormlands (Storm's End, Bronzegate, Tarth, Nightsong) are Tyrell, and Baratheon (Stannis) starts with Dragonstone only. Home factions stay Baratheon for these, so they show the occupied ring. This overrides the default-holder column in section 3. The map only tracks who holds what.
+> - **The Vale is scenery** (irrelevant to the war): it is drawn, labelled and unselectable, like Skagos. That removes its 4 territories and the region, leaving 42 territories in 11 regions. The built-in Unclaimed faction stays for the blank scenario.
 > - **Simplest option wins.** Where this spec is ambiguous, build the smaller thing.
 
 ## 1. Overview

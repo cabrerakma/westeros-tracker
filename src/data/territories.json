@@ -217,7 +217,6 @@
       849.4
     ],
     "adjacent": [
-      "eyrie",
       "moat-cailin",
       "seagard"
     ]
@@ -234,7 +233,6 @@
       882.9
     ],
     "adjacent": [
-      "eyrie",
       "raventree-hall",
       "riverrun",
       "the-twins"
@@ -270,7 +268,6 @@
     ],
     "adjacent": [
       "duskendale",
-      "eyrie",
       "goldengrove",
       "kings-landing",
       "raventree-hall"
@@ -288,79 +285,10 @@
       1010.3
     ],
     "adjacent": [
-      "eyrie",
       "golden-tooth",
       "harrenhal",
       "riverrun",
       "seagard"
-    ]
-  },
-  {
-    "id": "eyrie",
-    "name": "The Eyrie",
-    "seatHouse": "Arryn",
-    "region": "the-vale",
-    "homeFaction": "neutral",
-    "tier": "fortress",
-    "seat": [
-      564,
-      914
-    ],
-    "adjacent": [
-      "gulltown",
-      "harrenhal",
-      "raventree-hall",
-      "seagard",
-      "the-fingers",
-      "the-twins"
-    ]
-  },
-  {
-    "id": "gulltown",
-    "name": "Gulltown",
-    "seatHouse": "Grafton",
-    "region": "the-vale",
-    "homeFaction": "neutral",
-    "tier": "castle",
-    "seat": [
-      698.9,
-      933.4
-    ],
-    "adjacent": [
-      "eyrie",
-      "runestone",
-      "the-fingers"
-    ]
-  },
-  {
-    "id": "runestone",
-    "name": "Runestone",
-    "seatHouse": "Royce",
-    "region": "the-vale",
-    "homeFaction": "neutral",
-    "tier": "castle",
-    "seat": [
-      707.7,
-      908.3
-    ],
-    "adjacent": [
-      "gulltown"
-    ]
-  },
-  {
-    "id": "the-fingers",
-    "name": "The Fingers",
-    "seatHouse": "Baelish",
-    "region": "the-vale",
-    "homeFaction": "neutral",
-    "tier": "holdfast",
-    "seat": [
-      705.7,
-      828.6
-    ],
-    "adjacent": [
-      "eyrie",
-      "gulltown"
     ]
   },
   {

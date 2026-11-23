@@ -110,7 +110,7 @@ const REGION_DEFS = [
   { id: "beyond-the-wall", political: ["Wildlings"], minus: "wall" },
   { id: "the-north", political: ["The North", "The Gift"], minus: "wall" },
   { id: "the-riverlands", political: ["Riverlands"] },
-  { id: "the-vale", political: ["The Vale"] },
+  { id: "the-vale", political: ["The Vale"], scenery: true }, // drawn, but nobody can hold it
   { id: "the-westerlands", political: ["The Westerlands"] },
   { id: "the-crownlands", political: ["Crownsland"] },
   { id: "the-reach", political: ["The Reach"] },
@@ -119,6 +119,7 @@ const REGION_DEFS = [
   { id: "the-iron-islands", political: ["The Iron Islands"] },
   { id: "the-free-cities" },
 ];
+const SCENERY_REGION_NAMES = { "the-vale": "Vale" };
 const LABEL_OVERRIDES = { "the-iron-islands": { rotate: -90, size: 15, side: "west" }, "the-wall": { size: 11, along: 0.3 } };
 
 // ---------------------------------------------------------------- geometry helpers
@@ -318,6 +319,10 @@ const centroidOf = (poly) => {
 };
 
 for (const [rid, mp] of Object.entries(regionPolys)) {
+  if (REGION_DEFS.find((d) => d.id === rid)?.scenery) {
+    sceneryPolys.push(...mp);
+    continue;
+  }
   const regionSeats = territories.filter((t) => t.region === rid && seats[t.id]);
   if (rid === "the-wall") {
     // The Wall is a single territory (castle-black) covering the whole strip.
@@ -480,7 +485,15 @@ for (const m of src.mountains) {
 
 // ---------------------------------------------------------------- region labels
 const labels = {};
+const sceneryLabels = [];
 for (const [rid, mp] of Object.entries(regionPolys)) {
+  if (SCENERY_REGION_NAMES[rid]) {
+    const biggest = mp.reduce((m, p) => (polyArea(p) > polyArea(m) ? p : m), mp[0]);
+    const pl = pole(biggest);
+    const nm = SCENERY_REGION_NAMES[rid].toUpperCase();
+    sceneryLabels.push({ name: nm, pos: [r1(pl.p[0]), r1(pl.p[1])], size: r1(Math.max(13, Math.min(40, (2.1 * pl.d) / (nm.length * 0.85)))) });
+    continue;
+  }
   const name = (regionsFile.find((r) => r.id === rid)?.name ?? rid).replace(/^The /, "");
   const ov = LABEL_OVERRIDES[rid] ?? {};
   let pos, size;
@@ -508,7 +521,8 @@ const geo = {
   _viewBox: [0, 0, 1000, H],
 };
 for (const t of territories) geo[t.id] = multiPath(shapes[t.id] ?? []);
-geo._regions = Object.fromEntries(Object.entries(regionPolys).map(([k, mp]) => [k, multiPath(mp)]));
+geo._regions = Object.fromEntries(Object.entries(regionPolys).filter(([k]) => !SCENERY_REGION_NAMES[k]).map(([k, mp]) => [k, multiPath(mp)]));
+geo._sceneryLabels = sceneryLabels;
 geo._seaLinks = seaLinks;
 geo._lakes = lakes;
 geo._rivers = rivers;

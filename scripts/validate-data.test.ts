@@ -12,12 +12,12 @@ describe("data files", () => {
   it("has the expected counts from the spec", () => {
     const d = loadData();
     expect(d.factions).toHaveLength(13);
-    expect(d.regions).toHaveLength(12);
-    expect(d.territories).toHaveLength(46);
+    expect(d.regions).toHaveLength(11);
+    expect(d.territories).toHaveLength(42);
     const perRegion: Record<string, number> = {};
     for (const t of d.territories) perRegion[t.region] = (perRegion[t.region] ?? 0) + 1;
     expect(perRegion).toEqual({
-      "beyond-the-wall": 3, "the-wall": 1, "the-north": 8, "the-riverlands": 5, "the-vale": 4,
+      "beyond-the-wall": 3, "the-wall": 1, "the-north": 8, "the-riverlands": 5,
       "the-westerlands": 4, "the-iron-islands": 2, "the-crownlands": 3, "the-reach": 6,
       "the-stormlands": 4, dorne: 4, "the-free-cities": 2,
     });
@@ -27,7 +27,7 @@ describe("data files", () => {
     const d = loadData();
     expect(find(d, "dreadfort").homeFaction).toBe("bolton");
     expect(find(d, "riverrun").homeFaction).toBe("stark");
-    expect(find(d, "eyrie").homeFaction).toBe("neutral");
+    expect(find(d, "eyrie")).toBeUndefined(); // the Vale is scenery
     expect(find(d, "pentos").homeFaction).toBe("targaryen");
     expect(find(d, "braavos").homeFaction).toBe("targaryen");
   });
