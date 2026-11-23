@@ -45,10 +45,7 @@ button.link { border: none; background: none; color: var(--accent); text-decorat
 .outline.select { stroke: var(--accent); stroke-width: 3.2; }
 .sea-link { stroke: #5b6f7a; stroke-width: 1.3; stroke-dasharray: 5 5; opacity: 0.75; }
 .lake { fill: #aebfc7; stroke: #6f98ad; stroke-width: 0.8; opacity: 0.95; }
-.river { fill: none; stroke: #6f98ad; stroke-width: 0.9; stroke-linecap: round; opacity: 0.85; }
-.river.big { stroke-width: 1.8; }
 .road { fill: none; stroke: #8a7350; stroke-width: 1.1; stroke-dasharray: 4 4; opacity: 0.7; }
-.mountain { fill: #bfb394; stroke: #6f6247; stroke-width: 0.7; opacity: 0.85; }
 .region-name { font-family: var(--font-display); font-weight: 600; fill: #3a2c1a; paint-order: stroke; stroke: rgba(244, 236, 214, 0.75); stroke-width: 3px; stroke-linejoin: round; }
 .region-caption { font-family: var(--font-body); fill: #2f2415; paint-order: stroke; stroke: rgba(244, 236, 214, 0.8); stroke-width: 3px; }
 .castle { fill: #3b2f20; stroke: #f4ecd6; stroke-width: 1.2; stroke-linejoin: round; }

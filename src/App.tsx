@@ -9,7 +9,6 @@ const LAYER_LABELS: [keyof Layers, string][] = [
   ["regionNames", "Region names"],
   ["regionCaptions", "Region captions"],
   ["castleLabels", "Castle labels"],
-  ["decor", "Rivers and mountains"],
 ];
 
 // M1: holders are read-only, straight from the default scenario. Editing arrives in M2.
@@ -19,7 +18,7 @@ export function App() {
   const holders = useMemo(() => Object.fromEntries(Object.entries(scenario.territories).map(([id, s]) => [id, s.holder])), [scenario]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [layers, setLayers] = useState<Layers>({ regionBorders: true, regionNames: true, regionCaptions: true, castleLabels: true, decor: true });
+  const [layers, setLayers] = useState<Layers>({ regionBorders: true, regionNames: true, regionCaptions: true, castleLabels: true });
   const map = useRef<MapHandle>(null);
 
   const selected = TERRITORIES.find((t) => t.id === selectedId);
