@@ -104,3 +104,31 @@ button.danger { border-color: #8a2b1d; color: #8a2b1d; }
 button.danger:hover { background: #f6d9d2; }
 .territory-panel select { width: 100%; }
 .sidebar { overflow-x: hidden; }
+
+/* battles */
+.battles { margin-top: 16px; padding-top: 10px; border-top: 1px solid #cdbf9c; }
+.battle-list { list-style: none; margin: 10px 0 0; padding: 0; }
+.battle-list > li { padding: 8px 0; border-bottom: 1px dotted #d8ccaa; font-size: 15px; }
+.battle-head { display: flex; justify-content: space-between; gap: 8px; }
+.battle-date { color: var(--ink-soft); }
+.battle-outcome { font-weight: bold; }
+.battle-outcome.captured { color: #8a2b1d; }
+.battle-outcome.repelled { color: #2f6a3a; }
+.battle-note { margin-top: 3px; padding-left: 8px; border-left: 3px solid #cdbf9c; white-space: pre-wrap; }
+.battle-actions { display: flex; gap: 8px; margin-top: 6px; }
+.battle-form { display: flex; flex-direction: column; gap: 8px; padding: 10px; margin-top: 8px; background: #fbf4df; border: 1px solid #cdbf9c; border-radius: 6px; }
+.battle-form h3 { margin: 0; font: 600 15px var(--font-display); }
+.battle-form label { display: flex; flex-direction: column; gap: 2px; color: var(--ink-soft); font-size: 14px; }
+.battle-form label.check { flex-direction: row; align-items: center; gap: 6px; }
+.battle-form input[type="text"], .battle-form input:not([type]), .battle-form input[type="date"], .battle-form select, .battle-form textarea { font: inherit; color: var(--ink); background: #fffaf0; border: 1px solid var(--ink-soft); border-radius: 4px; padding: 3px 6px; width: 100%; }
+.form-error { margin: 0; color: #8a2b1d; }
+
+/* sidebar tabs */
+[hidden] { display: none !important; }
+.tabs { display: flex; gap: 4px; margin: -4px -4px 12px; border-bottom: 2px solid #cdbf9c; }
+.tab { flex: 1 1 0; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; border: none; border-bottom: 3px solid transparent; border-radius: 4px 4px 0 0; background: none; padding: 6px 4px; margin-bottom: -2px; }
+.tab.active { border-bottom-color: var(--accent); font-weight: bold; background: #fbf4df; }
+.legend, .log, .battles, .reset { margin-top: 0; }
+.log { border-top: none; padding-top: 0; }
+.reset { margin-top: 16px; }
+.sidebar dd button.link { display: block; text-align: left; padding: 1px 0; }

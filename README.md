@@ -2,7 +2,7 @@
 
 A browser map of Westeros for tracking which faction holds which of 42 territories in a friends' wargame campaign, with a per-territory battle history. One game master (GM) edits; everyone else watches. Full design: [westeros-map-spec-v2.md](westeros-map-spec-v2.md).
 
-**Status:** M0 (scaffold and data), M1 (static map, real geography) and M2 (GM editing) done. Next: export/import and sharing, battle history, then live sync.
+**Status:** map, GM editing and battle history done. Next: export/import and sharing, then live sync.
 
 ## Run it
 
@@ -77,12 +77,11 @@ Map geography: *Game of Thrones* shapefiles. Map of Westeros by Tear (Cartograph
 - **GM mode** (top bar) asks for the passcode, `password234`. It is set in `src/state/gm.ts` and is checked in the browser only, so it stops casual edits, not someone who reads the page's code.
 - In GM mode: pick a faction in "Who holds what", then click territories to give them to it (Esc stops). Or open a territory and use the "Held by" dropdown. Add notes there too.
 - **Undo / Redo** in the top bar, or Ctrl+Z and Shift+Ctrl+Z. The change log ("Recent changes") is never rewritten: undoing adds a line.
+- **Battles:** open a territory (the Territory tab) to see its battle history, with "fought N times" and "changed hands N times". In GM mode, "Record a battle": date, attacker and defender, the players on each side, the outcome (captured, repelled, draw) and a note. A capture can give the territory to the attacker in the same step. **Edit** and **Delete** fix a bad report; they change only the history, and if the battle had captured the territory you are asked whether to change the holder back. Deleting is the easy way out for a report that is too wrong to fix.
 - **Reset the map** (bottom of the sidebar, GM mode): choose a starting position, confirm, and it downloads a backup file of the current map first. The reset can still be undone, and the log is kept.
 - Everything is saved in this browser automatically. Until live sync is built, each browser has its own copy of the map.
 
 ## Next up
 
 - Export and import the map as a file, a share link, and a PNG for Discord.
-- Battle history per territory (date, who fought, who won, players, notes), recorded from the territory panel. The reset button already keeps and backs up battles.
-- **Edit and delete battles** (GM mode), for erratic reporting. Counts like "fought N times" come from the list, so they fix themselves. Decided: editing or deleting a battle changes only the history, and offers a prompt to change the holder back if that battle had captured the territory. If a report is too wrong to fix, just delete it.
 - Live sync (Supabase) so everyone sees the same map, then deploy.

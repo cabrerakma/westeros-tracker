@@ -91,3 +91,78 @@ describe("normalizeState", () => {
     expect(out.territories["pyke"].holder).toBe("greyjoy");
   });
 });
+
+describe("battles", () => {
+  const side = (faction: string, players: string[] = []) => ({ faction, players });
+  const add = (over: Partial<Extract<Action, { type: "addBattle" }>> = {}): Action => ({
+    type: "addBattle",
+    battleId: `b${++n}`,
+    territory: "winterfell",
+    date: "2026-11-20T12:00:00.000Z",
+    attacker: side("lannister", ["Sam"]),
+    defender: side("stark", ["Alex"]),
+    outcome: "captured",
+    applyHolder: true,
+    ...meta(),
+    ...over,
+  } as Action);
+
+  it("a capture records the battle and gives the territory to the attacker", () => {
+    const h = run(fresh(), add());
+    expect(h.present.battles).toHaveLength(1);
+    expect(h.present.battles[0]).toMatchObject({ territory: "winterfell", holderBefore: "stark", holderAfter: "lannister", outcome: "captured" });
+    expect(h.present.territories["winterfell"].holder).toBe("lannister");
+    expect(h.present.log[0].action).toBe("battle-recorded");
+  });
+  it("a capture without 'apply holder' leaves the holder alone", () => {
+    const h = run(fresh(), add({ applyHolder: false }));
+    expect(h.present.territories["winterfell"].holder).toBe("stark");
+    expect(h.present.battles[0].holderAfter).toBe("stark");
+  });
+  it("repelled and draw never change the holder", () => {
+    const h = run(fresh(), add({ outcome: "repelled" }), add({ outcome: "draw" }));
+    expect(h.present.territories["winterfell"].holder).toBe("stark");
+    expect(h.present.battles).toHaveLength(2);
+  });
+  it("rejects a battle with no attacker or the same faction on both sides", () => {
+    const h = fresh();
+    expect(run(h, add({ attacker: side("") }))).toBe(h);
+    expect(run(h, add({ attacker: side("stark") }))).toBe(h);
+    expect(run(h, add({ territory: "nowhere" }))).toBe(h);
+  });
+  it("undo removes the battle and restores the holder", () => {
+    const h = run(fresh(), add(), { type: "undo", ...meta() });
+    expect(h.present.battles).toHaveLength(0);
+    expect(h.present.territories["winterfell"].holder).toBe("stark");
+  });
+  it("editing changes only the history (not the holder) and recomputes the result", () => {
+    let h = run(fresh(), add());
+    const id = h.present.battles[0].id;
+    h = run(h, { type: "editBattle", battleId: id, changes: { outcome: "repelled", note: "Roose held on" }, ...meta() });
+    expect(h.present.battles[0]).toMatchObject({ outcome: "repelled", holderAfter: "stark", note: "Roose held on" });
+    expect(h.present.territories["winterfell"].holder).toBe("lannister"); // unchanged: the app prompts instead
+    expect(h.present.log[0].action).toBe("battle-edited");
+  });
+  it("deleting removes only the battle", () => {
+    let h = run(fresh(), add());
+    h = run(h, { type: "deleteBattle", battleId: h.present.battles[0].id, ...meta() });
+    expect(h.present.battles).toHaveLength(0);
+    expect(h.present.territories["winterfell"].holder).toBe("lannister");
+    expect(h.present.log[0].action).toBe("battle-deleted");
+  });
+  it("deleting can be undone", () => {
+    let h = run(fresh(), add());
+    h = run(h, { type: "deleteBattle", battleId: h.present.battles[0].id, ...meta() }, { type: "undo", ...meta() });
+    expect(h.present.battles).toHaveLength(1);
+  });
+  it("a reset keeps the battles", () => {
+    const h = run(fresh(), add(), { type: "loadScenario", scenarioId: "blank", ...meta() });
+    expect(h.present.battles).toHaveLength(1);
+  });
+  it("saved battles are validated on load", () => {
+    const s = run(fresh(), add()).present;
+    const raw = JSON.parse(JSON.stringify(s));
+    raw.battles.push({ id: "junk" }, { ...raw.battles[0], id: "x", territory: "eyrie" });
+    expect(normalizeState(raw)!.battles).toHaveLength(1);
+  });
+});

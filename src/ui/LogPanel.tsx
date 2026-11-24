@@ -12,6 +12,12 @@ function describe(e: LogEntry, factionName: (id?: string) => string): string {
   switch (e.action) {
     case "holder-changed":
       return `${place}: ${factionName(e.from)} to ${factionName(e.to)}`;
+    case "battle-recorded":
+      return `Battle at ${place}: ${factionName(e.from)} attacked ${factionName(e.to)} (${e.note})`;
+    case "battle-edited":
+      return `Edited a battle at ${place}`;
+    case "battle-deleted":
+      return `Deleted a battle at ${place}`;
     case "scenario-loaded":
       return `Map reset to: ${e.note}`;
     case "undo":

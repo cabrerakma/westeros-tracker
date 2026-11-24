@@ -1,5 +1,5 @@
 import { DEFAULT_SCENARIO_ID, SCENARIOS, TERRITORIES } from "../data";
-import type { Faction, FactionId, GameState, LogEntry, TerritoryId } from "../types";
+import type { Battle, Faction, FactionId, GameState, LogEntry, TerritoryId } from "../types";
 
 /** All changes go through this reducer, so every one is undoable and logged. */
 export interface History {
@@ -16,6 +16,9 @@ interface Meta {
 export type Action =
   | ({ type: "setHolder"; territory: TerritoryId; holder: FactionId } & Meta)
   | ({ type: "setNote"; territory: TerritoryId; note: string } & Meta)
+  | ({ type: "addBattle"; battleId: string; territory: TerritoryId; date: string; attacker: Battle["attacker"]; defender: Battle["defender"]; outcome: Battle["outcome"]; note?: string; applyHolder: boolean } & Meta)
+  | ({ type: "editBattle"; battleId: string; changes: Partial<Pick<Battle, "timestamp" | "attacker" | "defender" | "outcome" | "note">> } & Meta)
+  | ({ type: "deleteBattle"; battleId: string } & Meta)
   | ({ type: "loadScenario"; scenarioId: string } & Meta)
   | ({ type: "undo" } & Meta)
   | ({ type: "redo" } & Meta);
@@ -66,6 +69,55 @@ export function historyReducer(h: History, a: Action): History {
       const { note: _old, ...rest } = current;
       return commit(h, { ...s, territories: { ...s.territories, [a.territory]: note ? { ...rest, note } : rest } });
     }
+    case "addBattle": {
+      const current = s.territories[a.territory];
+      if (!current || !a.attacker.faction || a.attacker.faction === a.defender.faction) return h;
+      const captures = a.outcome === "captured" && a.applyHolder;
+      const holderAfter = captures ? a.attacker.faction : current.holder;
+      const battle: Battle = {
+        id: a.battleId,
+        timestamp: a.date,
+        territory: a.territory,
+        attacker: a.attacker,
+        defender: a.defender,
+        outcome: a.outcome,
+        holderBefore: current.holder,
+        holderAfter,
+        ...(a.note?.trim() ? { note: a.note.trim() } : {}),
+      };
+      return commit(h, {
+        ...s,
+        territories: captures ? { ...s.territories, [a.territory]: { ...current, holder: holderAfter } } : s.territories,
+        battles: [...s.battles, battle],
+        log: [entry(a, { territory: a.territory, action: "battle-recorded", from: a.attacker.faction, to: a.defender.faction, note: a.outcome }), ...s.log],
+      });
+    }
+    case "editBattle": {
+      const old = s.battles.find((b) => b.id === a.battleId);
+      if (!old) return h;
+      const next: Battle = { ...old, ...a.changes };
+      next.holderAfter = next.outcome === "captured" ? next.attacker.faction : next.holderBefore;
+      if (a.changes.note !== undefined) {
+        const n = a.changes.note.trim();
+        if (n) next.note = n;
+        else delete next.note;
+      }
+      if (JSON.stringify(next) === JSON.stringify(old)) return h;
+      return commit(h, {
+        ...s,
+        battles: s.battles.map((b) => (b.id === old.id ? next : b)),
+        log: [entry(a, { territory: old.territory, action: "battle-edited", from: next.attacker.faction, to: next.defender.faction, note: next.outcome }), ...s.log],
+      });
+    }
+    case "deleteBattle": {
+      const old = s.battles.find((b) => b.id === a.battleId);
+      if (!old) return h;
+      return commit(h, {
+        ...s,
+        battles: s.battles.filter((b) => b.id !== old.id),
+        log: [entry(a, { territory: old.territory, action: "battle-deleted", from: old.attacker.faction, to: old.defender.faction, note: old.outcome }), ...s.log],
+      });
+    }
     case "loadScenario": {
       if (!SCENARIOS[a.scenarioId]) return h;
       const fresh = initialState(a.scenarioId);
@@ -77,7 +129,7 @@ export function historyReducer(h: History, a: Action): History {
       if (!prev) return h;
       return {
         past: h.past.slice(0, -1),
-        present: { ...prev, log: [entry(a, { action: "undo" }), ...s.log], battles: s.battles },
+        present: { ...prev, log: [entry(a, { action: "undo" }), ...s.log] },
         future: [s, ...h.future],
       };
     }
@@ -86,7 +138,7 @@ export function historyReducer(h: History, a: Action): History {
       if (!next) return h;
       return {
         past: [...h.past, s].slice(-MAX_HISTORY),
-        present: { ...next, log: [entry(a, { action: "redo" }), ...s.log], battles: s.battles },
+        present: { ...next, log: [entry(a, { action: "redo" }), ...s.log] },
         future: h.future.slice(1),
       };
     }
@@ -95,6 +147,13 @@ export function historyReducer(h: History, a: Action): History {
 
 const isFaction = (f: unknown): f is Faction =>
   !!f && typeof f === "object" && typeof (f as Faction).id === "string" && typeof (f as Faction).name === "string" && /^#[0-9a-fA-F]{6}$/.test((f as Faction).color);
+
+const OUTCOMES = ["captured", "repelled", "draw"];
+const isSide = (x: unknown) => !!x && typeof x === "object" && typeof (x as Battle["attacker"]).faction === "string" && Array.isArray((x as Battle["attacker"]).players);
+const isBattle = (b: unknown): b is Battle =>
+  !!b && typeof b === "object" && typeof (b as Battle).id === "string" && typeof (b as Battle).territory === "string" && typeof (b as Battle).timestamp === "string" &&
+  OUTCOMES.includes((b as Battle).outcome) && isSide((b as Battle).attacker) && isSide((b as Battle).defender) &&
+  TERRITORIES.some((t) => t.id === (b as Battle).territory);
 
 /**
  * Turn saved or imported data into a valid state for the current map. Unknown version -> null.
@@ -122,6 +181,6 @@ export function normalizeState(raw: unknown): GameState | null {
     territories,
     factions,
     log: Array.isArray(r.log) ? (r.log.filter((e) => e && typeof e.id === "string" && typeof e.action === "string") as LogEntry[]) : [],
-    battles: Array.isArray(r.battles) ? r.battles : [],
+    battles: Array.isArray(r.battles) ? r.battles.filter(isBattle) : [],
   };
 }

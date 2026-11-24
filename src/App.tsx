@@ -4,6 +4,7 @@ import { MapView, type Layers, type MapHandle } from "./map/MapView";
 import { checkPasscode } from "./state/gm";
 import { historyReducer, initialHistory, initialState, newMeta } from "./state/game";
 import { downloadBackup, loadState, saveState } from "./state/persistence";
+import { BattlePanel, type BattleInput } from "./ui/BattlePanel";
 import { Legend } from "./ui/Legend";
 import { LogPanel } from "./ui/LogPanel";
 import { TerritoryPanel } from "./ui/TerritoryPanel";
@@ -24,6 +25,7 @@ export function App() {
   const [gm, setGm] = useState(false); // always starts in View mode
   const [paintId, setPaintId] = useState<string | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [tab, setTab] = useState<"key" | "territory" | "changes">("key");
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [layers, setLayers] = useState<Layers>({ regionBorders: true, regionNames: true, regionCaptions: true, castleLabels: true });
   const [resetTo, setResetTo] = useState("war-of-five-kings");
@@ -50,10 +52,13 @@ export function App() {
 
   const handleSelect = useCallback(
     (id: string | null) => {
-      if (id && gm && paintId) setHolder(id, paintId);
+      const painting = !!(id && gm && paintId);
+      if (painting) setHolder(id!, paintId!);
       setSelectedId(id);
+      if (id && !painting) setTab("territory"); // while painting, stay on the key
+      if (id === null && tab === "territory") setTab("key");
     },
-    [gm, paintId, setHolder],
+    [gm, paintId, setHolder, tab],
   );
 
   // Keyboard: Esc stops painting; Ctrl/Cmd+Z undoes; Shift+Ctrl/Cmd+Z or Ctrl+Y redoes (GM mode only).
@@ -128,7 +133,23 @@ export function App() {
         <MapView ref={map} holders={holders} factions={factions} selectedId={selectedId} onSelect={handleSelect} layers={layers} paintMode={gm && !!paintId} />
         {sidebarOpen && (
           <aside className="sidebar">
-            <Legend factions={factions} holders={holders} gm={gm} paintId={paintId} onPick={(id) => setPaintId(paintId === id ? null : id)} />
+            <nav className="tabs" role="tablist">
+              {(
+                [
+                  ["key", "Key"],
+                  ["territory", selected ? selected.name : "Territory"],
+                  ["changes", "Changes"],
+                ] as const
+              ).map(([id, label]) => (
+                <button key={id} role="tab" aria-selected={tab === id} className={tab === id ? "tab active" : "tab"} onClick={() => setTab(id)}>
+                  {label}
+                </button>
+              ))}
+            </nav>
+            <div hidden={tab !== "key"}>
+              <Legend factions={factions} holders={holders} gm={gm} paintId={paintId} onPick={(id) => setPaintId(paintId === id ? null : id)} />
+            </div>
+            <div hidden={tab !== "territory"}>
             {selected ? (
               <TerritoryPanel
                 key={selected.id + "|" + (state.territories[selected.id]?.note ?? "")}
@@ -148,6 +169,24 @@ export function App() {
                 <p>Click a territory to see its details. Drag to pan, scroll or pinch to zoom.</p>
               </section>
             )}
+            {selected && (
+              <BattlePanel
+                key={"battles-" + selected.id}
+                territory={selected}
+                holder={holders[selected.id]}
+                battles={state.battles}
+                factions={factions}
+                gm={gm}
+                onAdd={(i: BattleInput, applyHolder) =>
+                  dispatch({ type: "addBattle", battleId: newMeta().id, territory: selected.id, date: i.date, attacker: i.attacker, defender: i.defender, outcome: i.outcome, note: i.note, applyHolder, ...newMeta() })
+                }
+                onEdit={(id, i) => dispatch({ type: "editBattle", battleId: id, changes: { timestamp: i.date, attacker: i.attacker, defender: i.defender, outcome: i.outcome, note: i.note }, ...newMeta() })}
+                onDelete={(id) => dispatch({ type: "deleteBattle", battleId: id, ...newMeta() })}
+                onSetHolder={(h) => setHolder(selected.id, h)}
+              />
+            )}
+            </div>
+            <div hidden={tab !== "changes"}>
             <LogPanel log={state.log} factions={factions} />
             {gm && (
               <section className="reset">
@@ -165,6 +204,7 @@ export function App() {
                 </button>
               </section>
             )}
+            </div>
           </aside>
         )}
       </div>
