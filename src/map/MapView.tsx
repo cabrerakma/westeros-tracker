@@ -321,7 +321,10 @@ export const MapView = forwardRef<MapHandle, Props>(function MapView({ holders, 
       </svg>
 
       {hovered && (
-        <div className="tooltip" style={{ left: tip.x + 14, top: tip.y + 14 }} role="tooltip">
+        <div className="tooltip" style={{
+            left: tip.x + 14 + 240 > (wrapRef.current?.clientWidth ?? Infinity) ? Math.max(0, tip.x - 254) : tip.x + 14,
+            top: tip.y + 14 + 120 > (wrapRef.current?.clientHeight ?? Infinity) ? Math.max(0, tip.y - 134) : tip.y + 14,
+          }} role="tooltip">
           <strong>{hovered.name}</strong>
           <div>{hovered.seatHouse}</div>
           <div>{REGIONS.find((r) => r.id === hovered.region)?.name}</div>
