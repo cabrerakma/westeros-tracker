@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from "r
 import { SCENARIOS, TERRITORIES } from "./data";
 import { MapView, type Layers, type MapHandle } from "./map/MapView";
 import { checkPasscode } from "./state/gm";
-import { historyReducer, initialHistory, initialState, newMeta } from "./state/game";
+import { historyReducer, initialHistory, initialState, newMeta, normalizeState } from "./state/game";
 import { downloadBackup, loadState, saveState } from "./state/persistence";
 import { BattlePanel, type BattleInput } from "./ui/BattlePanel";
 import { Legend } from "./ui/Legend";
@@ -83,10 +83,24 @@ export function App() {
 
   const reset = () => {
     const name = SCENARIOS[resetTo].name;
-    if (!window.confirm(`Reset the whole map to "${name}"?\n\nA backup file of the current map is downloaded first, and you can still undo.`)) return;
+    if (!window.confirm(`Reset the whole map to "${name}"?\n\nThis also clears the battle history and the change log. A backup file of everything is downloaded first, and you can still undo.`)) return;
     downloadBackup(state, "westeros-backup-before-reset");
     dispatch({ type: "loadScenario", scenarioId: resetTo, ...newMeta() });
     setPaintId(null);
+  };
+
+  const saveToFile = () => downloadBackup(state, "westeros-map");
+  const loadFromFile = async (file: File | undefined) => {
+    if (!file) return;
+    try {
+      const loaded = normalizeState(JSON.parse(await file.text()));
+      if (!loaded) throw new Error("not a Westeros map file");
+      if (!window.confirm(`Replace the current map with the one in "${file.name}"?\n\nYou can still undo.`)) return;
+      dispatch({ type: "importState", state: loaded, ...newMeta() });
+      setPaintId(null);
+    } catch {
+      window.alert("That file could not be read as a Westeros map. Nothing was changed.");
+    }
   };
 
   return (
@@ -190,8 +204,24 @@ export function App() {
             <LogPanel log={state.log} factions={factions} />
             {gm && (
               <section className="reset">
+                <h2>Save and load</h2>
+                <p className="muted small">The map, battles and log live in this browser. Save a copy to a file to keep it or move it elsewhere.</p>
+                <div className="battle-actions">
+                  <button onClick={saveToFile}>Save to file</button>
+                  <label className="file-button">
+                    Load from file…
+                    <input
+                      type="file"
+                      accept="application/json,.json"
+                      onChange={(e) => {
+                        loadFromFile(e.target.files?.[0]);
+                        e.target.value = "";
+                      }}
+                    />
+                  </label>
+                </div>
                 <h2>Reset the map</h2>
-                <p className="muted small">Puts every holder back to a starting position. A backup file downloads first, and you can undo.</p>
+                <p className="muted small">Puts every holder back to a starting position and clears the battle history and change log. A backup file of everything downloads first, and you can undo.</p>
                 <select value={resetTo} onChange={(e) => setResetTo(e.target.value)} aria-label="Starting position">
                   {Object.values(SCENARIOS).map((s) => (
                     <option key={s.id} value={s.id}>

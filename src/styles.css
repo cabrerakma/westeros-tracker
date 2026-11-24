@@ -132,3 +132,7 @@ button.danger:hover { background: #f6d9d2; }
 .log { border-top: none; padding-top: 0; }
 .reset { margin-top: 16px; }
 .sidebar dd button.link { display: block; text-align: left; padding: 1px 0; }
+.file-button { display: inline-block; cursor: pointer; border: 1px solid var(--ink-soft); background: var(--panel); border-radius: 4px; padding: 4px 10px; }
+.file-button:hover { background: #fff6dc; }
+.file-button input { display: none; }
+.reset h2:not(:first-child) { margin-top: 10px; }

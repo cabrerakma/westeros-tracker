@@ -57,11 +57,10 @@ describe("notes", () => {
 });
 
 describe("loadScenario (reset)", () => {
-  it("resets holders, keeps the log, and can be undone", () => {
+  it("resets holders and clears the log, and can be undone", () => {
     let h = run(fresh(), setHolder("casterly-rock", "stark"), { type: "loadScenario", scenarioId: "blank", ...meta() });
     expect(h.present.territories["casterly-rock"].holder).toBe("neutral");
-    expect(h.present.log[0].action).toBe("scenario-loaded");
-    expect(h.present.log.some((e) => e.action === "holder-changed")).toBe(true);
+    expect(h.present.log.map((e) => e.action)).toEqual(["scenario-loaded"]);
     h = run(h, { type: "undo", ...meta() });
     expect(h.present.territories["casterly-rock"].holder).toBe("stark");
   });
@@ -155,8 +154,10 @@ describe("battles", () => {
     h = run(h, { type: "deleteBattle", battleId: h.present.battles[0].id, ...meta() }, { type: "undo", ...meta() });
     expect(h.present.battles).toHaveLength(1);
   });
-  it("a reset keeps the battles", () => {
-    const h = run(fresh(), add(), { type: "loadScenario", scenarioId: "blank", ...meta() });
+  it("a reset clears the battles, and undo brings them back", () => {
+    let h = run(fresh(), add(), { type: "loadScenario", scenarioId: "blank", ...meta() });
+    expect(h.present.battles).toHaveLength(0);
+    h = run(h, { type: "undo", ...meta() });
     expect(h.present.battles).toHaveLength(1);
   });
   it("saved battles are validated on load", () => {
@@ -164,5 +165,16 @@ describe("battles", () => {
     const raw = JSON.parse(JSON.stringify(s));
     raw.battles.push({ id: "junk" }, { ...raw.battles[0], id: "x", territory: "eyrie" });
     expect(normalizeState(raw)!.battles).toHaveLength(1);
+  });
+});
+
+describe("importState", () => {
+  it("replaces the map with a loaded state, logs it, and can be undone", () => {
+    const other = initialState("blank");
+    let h = run(fresh(), { type: "importState", state: other, ...meta() });
+    expect(h.present.territories["winterfell"].holder).toBe("neutral");
+    expect(h.present.log[0].action).toBe("imported");
+    h = run(h, { type: "undo", ...meta() });
+    expect(h.present.territories["winterfell"].holder).toBe("stark");
   });
 });

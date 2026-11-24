@@ -20,6 +20,8 @@ function describe(e: LogEntry, factionName: (id?: string) => string): string {
       return `Deleted a battle at ${place}`;
     case "scenario-loaded":
       return `Map reset to: ${e.note}`;
+    case "imported":
+      return "Loaded the map from a file";
     case "undo":
       return "Undid the last change";
     case "redo":

@@ -20,6 +20,7 @@ export type Action =
   | ({ type: "editBattle"; battleId: string; changes: Partial<Pick<Battle, "timestamp" | "attacker" | "defender" | "outcome" | "note">> } & Meta)
   | ({ type: "deleteBattle"; battleId: string } & Meta)
   | ({ type: "loadScenario"; scenarioId: string } & Meta)
+  | ({ type: "importState"; state: GameState } & Meta)
   | ({ type: "undo" } & Meta)
   | ({ type: "redo" } & Meta);
 
@@ -121,8 +122,12 @@ export function historyReducer(h: History, a: Action): History {
     case "loadScenario": {
       if (!SCENARIOS[a.scenarioId]) return h;
       const fresh = initialState(a.scenarioId);
-      // The log and battle history are kept, never wiped silently.
-      return commit(h, { ...fresh, log: [entry(a, { action: "scenario-loaded", note: SCENARIOS[a.scenarioId].name }), ...s.log], battles: s.battles });
+      // A reset starts fresh: holders, battles and the change log are cleared. The app downloads a backup
+      // file first, and undo brings everything back.
+      return commit(h, { ...fresh, log: [entry(a, { action: "scenario-loaded", note: SCENARIOS[a.scenarioId].name })] });
+    }
+    case "importState": {
+      return commit(h, { ...a.state, log: [entry(a, { action: "imported" }), ...a.state.log] });
     }
     case "undo": {
       const prev = h.past[h.past.length - 1];
