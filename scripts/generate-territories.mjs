@@ -102,6 +102,11 @@ const SEA_LINKS_EXTRA = [
 const SKIP_AUTO_SEA_LINK = ["pentos", "braavos"]; // linked explicitly above, not to the nearest Westeros territory
 // Land drawn as unselectable scenery (not part of any territory): [lonMin, latMin, lonMax, latMax].
 const SCENERY_BOXES = [[22.9, 32.8, 26.6, 38.6]]; // Skagos, Skane and the islets around them
+// Small detached islets far from their castle (Shield Islands, Estermont, ...) are drawn as unselectable
+// scenery, like Skagos, so hovering a castle does not light up distant specks of land.
+const ISLET_MIN_DISTANCE = 50; // map units from the castle
+const ISLET_MAX_SIZE = 45; // map units across
+const KEEP_ISLANDS = ["pyke", "harlaw", "dragonstone", "the-crag"]; // their islands ARE the territory
 const FORCE_NOT_ADJACENT = []; // [a, b] pairs removed from derived land adjacency
 
 // Region priority: earlier regions win overlaps. political = names in the source layer.
@@ -416,6 +421,24 @@ for (const t of territories) {
 if (reassigned.length) console.log("Reassigned cut-off pieces: " + reassigned.join(", "));
 // Merge pieces of a territory that touch each other, so no seam is drawn between them.
 for (const t of territories) if (shapes[t.id]?.length > 1) shapes[t.id] = union(shapes[t.id].map((p) => [p]));
+
+// Detached islets far from their castle become scenery.
+const isletsMoved = [];
+for (const t of territories) {
+  if (KEEP_ISLANDS.includes(t.id) || !shapes[t.id] || shapes[t.id].length < 2) continue;
+  const keep = [];
+  for (const piece of shapes[t.id]) {
+    const xs = piece[0].map((p) => p[0]), ys = piece[0].map((p) => p[1]);
+    const size = Math.max(Math.max(...xs) - Math.min(...xs), Math.max(...ys) - Math.min(...ys));
+    const dist = Math.min(...piece[0].map((p) => Math.hypot(p[0] - seats[t.id][0], p[1] - seats[t.id][1])));
+    if (!pointInPoly(seats[t.id], piece) && size <= ISLET_MAX_SIZE && dist >= ISLET_MIN_DISTANCE) {
+      sceneryPolys.push(piece);
+      isletsMoved.push(t.id);
+    } else keep.push(piece);
+  }
+  shapes[t.id] = keep;
+}
+if (isletsMoved.length) console.log("Islets made scenery: " + isletsMoved.join(", "));
 
 const ids = territories.map((t) => t.id);
 const edges = Object.fromEntries(ids.map((id) => [id, edgesOf(shapes[id] ?? [])]));
