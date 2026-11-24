@@ -4,84 +4,96 @@
     "name": "House Stark",
     "color": "#8FA3B0",
     "glyph": "wolf",
-    "isPlayer": true
+    "isPlayer": true,
+    "altColor": "#56B4E9"
   },
   {
     "id": "lannister",
     "name": "House Lannister",
     "color": "#B3261E",
     "glyph": "lion",
-    "isPlayer": true
+    "isPlayer": true,
+    "altColor": "#D55E00"
   },
   {
     "id": "baratheon",
     "name": "House Baratheon",
     "color": "#E0B020",
     "glyph": "stag",
-    "isPlayer": true
+    "isPlayer": true,
+    "altColor": "#F0E442"
   },
   {
     "id": "targaryen",
     "name": "House Targaryen",
     "color": "#6A1B4D",
     "glyph": "dragon",
-    "isPlayer": true
+    "isPlayer": true,
+    "altColor": "#CC79A7"
   },
   {
     "id": "greyjoy",
     "name": "House Greyjoy",
     "color": "#1E3A4C",
     "glyph": "kraken",
-    "isPlayer": true
+    "isPlayer": true,
+    "altColor": "#0B2A5B"
   },
   {
     "id": "tyrell",
     "name": "House Tyrell",
     "color": "#3E8E3E",
     "glyph": "rose",
-    "isPlayer": true
+    "isPlayer": true,
+    "altColor": "#009E73"
   },
   {
     "id": "martell",
     "name": "House Martell",
     "color": "#E4731C",
     "glyph": "sun-spear",
-    "isPlayer": true
+    "isPlayer": true,
+    "altColor": "#E69F00"
   },
   {
     "id": "night-watch",
     "name": "Night's Watch",
     "color": "#2B2B2B",
     "glyph": "crossed-swords",
-    "isPlayer": false
+    "isPlayer": false,
+    "altColor": "#111111"
   },
   {
     "id": "free-folk",
     "name": "Free Folk",
     "color": "#A58B5B",
     "glyph": "horned-skull",
-    "isPlayer": false
+    "isPlayer": false,
+    "altColor": "#D9C79A"
   },
   {
     "id": "bolton",
     "name": "House Bolton",
     "color": "#F0B8C8",
     "glyph": "flayed-man",
-    "isPlayer": false
+    "isPlayer": false,
+    "altColor": "#FFFFFF"
   },
   {
     "id": "brotherhood",
     "name": "Brotherhood without Banners",
     "color": "#6B4A2B",
     "glyph": "flaming-sword",
-    "isPlayer": false
+    "isPlayer": false,
+    "altColor": "#7A4A1E"
   },
   {
     "id": "mercenaries",
     "name": "Neutrals (Mercenaries)",
     "color": "#7C7C3A",
     "glyph": "coin-dagger",
-    "isPlayer": false
+    "isPlayer": false,
+    "altColor": "#8A8A8A"
   },
   {
     "id": "neutral",

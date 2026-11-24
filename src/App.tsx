@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from "react";
-import { SCENARIOS, TERRITORIES } from "./data";
+import { FACTIONS, SCENARIOS, TERRITORIES } from "./data";
 import { MapView, type Layers, type MapHandle } from "./map/MapView";
 import { checkPasscode } from "./state/gm";
 import { historyReducer, initialHistory, initialState, newMeta, normalizeState } from "./state/game";
@@ -75,6 +75,12 @@ export function App() {
   const map = useRef<MapHandle>(null);
 
   const factions = state.factions;
+  // Color-blind-safe palette: only changes how colors are drawn, never the data.
+  const [cbSafe, setCbSafe] = useState(false);
+  const shownFactions = useMemo(
+    () => (cbSafe ? factions.map((f) => ({ ...f, color: FACTIONS.find((d) => d.id === f.id)?.altColor ?? f.color })) : factions),
+    [cbSafe, factions],
+  );
   const holders = useMemo(() => Object.fromEntries(Object.entries(state.territories).map(([id, s]) => [id, s.holder])), [state.territories]);
   const selected = TERRITORIES.find((t) => t.id === selectedId);
   const paintFaction = paintId ? factions.find((f) => f.id === paintId) : undefined;
@@ -187,6 +193,9 @@ export function App() {
                 <input type="checkbox" checked={layers[key]} onChange={(e) => setLayers({ ...layers, [key]: e.target.checked })} /> {label}
               </label>
             ))}
+            <label>
+              <input type="checkbox" checked={cbSafe} onChange={(e) => setCbSafe(e.target.checked)} /> Color-blind friendly colors
+            </label>
           </div>
         </details>
         <button onClick={() => setSidebarOpen(!sidebarOpen)} aria-expanded={sidebarOpen}>
@@ -209,7 +218,7 @@ export function App() {
         </div>
       )}
       <div className="body">
-        <MapView ref={map} holders={holders} factions={factions} selectedId={selectedId} onSelect={handleSelect} layers={layers} paintMode={gm && !!paintId} />
+        <MapView ref={map} holders={holders} factions={shownFactions} selectedId={selectedId} onSelect={handleSelect} layers={layers} paintMode={gm && !!paintId} />
         {sidebarOpen && (
           <aside className="sidebar">
             <nav className="tabs" role="tablist">
@@ -226,7 +235,7 @@ export function App() {
               ))}
             </nav>
             <div hidden={tab !== "key"}>
-              <Legend factions={factions} holders={holders} gm={gm} paintId={paintId} onPick={(id) => setPaintId(paintId === id ? null : id)} />
+              <Legend factions={shownFactions} holders={holders} gm={gm} paintId={paintId} onPick={(id) => setPaintId(paintId === id ? null : id)} />
             </div>
             <div hidden={tab !== "territory"}>
             {selected ? (
