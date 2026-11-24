@@ -84,5 +84,5 @@ Map geography: *Game of Thrones* shapefiles. Map of Westeros by Tear (Cartograph
 
 - Export and import the map as a file, a share link, and a PNG for Discord.
 - Battle history per territory (date, who fought, who won, players, notes), recorded from the territory panel. The reset button already keeps and backs up battles.
-- **Edit and delete battles** (GM mode), for erratic reporting. The "fought N times" and "changed hands" counts come from the list, so they fix themselves. To decide when we build it: if you delete or edit a battle that captured a territory, should the holder change back too, or only the history? (Suggested: only the history, with a prompt offering to fix the holder.)
+- **Edit and delete battles** (GM mode), for erratic reporting. Counts like "fought N times" come from the list, so they fix themselves. Decided: editing or deleting a battle changes only the history, and offers a prompt to change the holder back if that battle had captured the territory. If a report is too wrong to fix, just delete it.
 - Live sync (Supabase) so everyone sees the same map, then deploy.
