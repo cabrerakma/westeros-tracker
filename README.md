@@ -2,6 +2,8 @@
 
 A browser map of Westeros for tracking which faction holds which of 42 territories in a friends' wargame campaign, with a per-territory battle history. One game master (GM) edits; everyone else watches. Full design: [westeros-map-spec-v2.md](westeros-map-spec-v2.md).
 
+**Live site:** https://cabrerakma.github.io/westeros-tracker/ (repository: https://github.com/cabrerakma/westeros-tracker)
+
 **Status:** map, GM editing, battle history and publishing through `campaign.json` done. Next: put it on GitHub Pages; a database later.
 
 ## Run it
@@ -105,5 +107,5 @@ Why not automatic? GitHub Pages is read-only, so the page cannot write the file 
 
 ## Next up
 
-- Put it on GitHub Pages (steps above) and try the publish flow for real.
+- Try the publish flow for real (change the map, Save to file, replace `public/campaign.json`, push).
 - A database, so changes show up for everyone without the manual publish step.
