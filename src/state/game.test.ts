@@ -178,3 +178,13 @@ describe("importState", () => {
     expect(h.present.territories["winterfell"].holder).toBe("stark");
   });
 });
+
+describe("replaceHistory", () => {
+  it("loads a map as the new starting point with no log entry and nothing to undo", () => {
+    const h = run(fresh(), setHolder("pyke", "stark"), { type: "replaceHistory", state: initialState("blank") });
+    expect(h.present.territories["pyke"].holder).toBe("neutral");
+    expect(h.past).toHaveLength(0);
+    expect(h.future).toHaveLength(0);
+    expect(h.present.log).toHaveLength(0);
+  });
+});

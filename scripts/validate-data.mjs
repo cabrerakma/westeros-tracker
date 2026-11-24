@@ -24,12 +24,14 @@ export function loadData() {
     glyphs: readJson("src/data/glyphs.json"),
     // territories.geo.json is generated in M1; it is optional until then.
     geo: existsSync(geoPath) ? readJson("src/data/territories.geo.json") : null,
+    // The published map (public/campaign.json), replaced by hand when the GM publishes.
+    campaign: existsSync(join(root, "public/campaign.json")) ? readJson("public/campaign.json") : null,
     scenarios,
   };
 }
 
 /** Returns an array of human-readable error strings; empty means valid. */
-export function validateData({ factions, regions, territories, glyphs, geo, scenarios }) {
+export function validateData({ factions, regions, territories, glyphs, geo, scenarios, campaign }) {
   const errors = [];
   const err = (m) => errors.push(m);
 
@@ -114,6 +116,24 @@ export function validateData({ factions, regions, territories, glyphs, geo, scen
       else if (!scenarioFactions.has(st.holder)) err(`${where}: holder "${st.holder}" of "${t.id}" is not a faction in the scenario`);
     }
     for (const id of Object.keys(s.territories ?? {})) if (!byId.has(id)) err(`${where}: unknown territory "${id}"`);
+  }
+
+  // The published map: must match the current territories and only use factions it defines.
+  if (campaign) {
+    const where = "public/campaign.json";
+    if (campaign.version !== 1) err(`${where}: unknown version ${campaign.version}`);
+    const cf = new Set((campaign.factions ?? []).map((f) => f.id));
+    if (!cf.has("neutral")) err(`${where}: the "neutral" faction is missing`);
+    for (const t of territories) {
+      const st = campaign.territories?.[t.id];
+      if (!st) err(`${where}: no holder for "${t.id}" (was it made for an older map?)`);
+      else if (!cf.has(st.holder)) err(`${where}: holder "${st.holder}" of "${t.id}" is not one of its factions`);
+    }
+    for (const id of Object.keys(campaign.territories ?? {})) if (!byId.has(id)) err(`${where}: unknown territory "${id}"`);
+    for (const b of campaign.battles ?? []) {
+      if (!byId.has(b.territory)) err(`${where}: a battle refers to unknown territory "${b.territory}"`);
+      for (const side of [b.attacker, b.defender]) if (!cf.has(side?.faction)) err(`${where}: a battle uses unknown faction "${side?.faction}"`);
+    }
   }
 
   return errors;

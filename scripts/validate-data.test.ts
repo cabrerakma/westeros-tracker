@@ -75,6 +75,26 @@ describe("validator catches problems", () => {
     expect(msg).toMatch(/holder "nobody"/);
   });
 
+  it("a published campaign.json for an older map", () => {
+    const d = fresh();
+    expect(d.campaign).not.toBeNull();
+    delete d.campaign.territories["winterfell"];
+    d.campaign.territories["eyrie"] = { holder: "stark" };
+    d.campaign.territories["pyke"].holder = "ghost";
+    const msg = validateData(d).join("\n");
+    expect(msg).toMatch(/no holder for "winterfell"/);
+    expect(msg).toMatch(/unknown territory "eyrie"/);
+    expect(msg).toMatch(/holder "ghost"/);
+  });
+
+  it("a campaign.json battle with unknown territory or faction", () => {
+    const d = fresh();
+    d.campaign.battles = [{ territory: "nowhere", attacker: { faction: "stark" }, defender: { faction: "nobody" } }];
+    const msg = validateData(d).join("\n");
+    expect(msg).toMatch(/unknown territory "nowhere"/);
+    expect(msg).toMatch(/unknown faction "nobody"/);
+  });
+
   it("empty region", () => {
     const d = fresh();
     d.regions.push({ id: "empty", name: "Empty", labelPos: [0, 0] });

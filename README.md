@@ -2,7 +2,7 @@
 
 A browser map of Westeros for tracking which faction holds which of 42 territories in a friends' wargame campaign, with a per-territory battle history. One game master (GM) edits; everyone else watches. Full design: [westeros-map-spec-v2.md](westeros-map-spec-v2.md).
 
-**Status:** map, GM editing and battle history done. Next: export/import and sharing, then live sync.
+**Status:** map, GM editing, battle history and publishing through `campaign.json` done. Next: a PNG export for Discord; a database later.
 
 ## Run it
 
@@ -78,10 +78,32 @@ Map geography: *Game of Thrones* shapefiles. Map of Westeros by Tear (Cartograph
 - In GM mode: pick a faction in "Who holds what", then click territories to give them to it (Esc stops). Or open a territory and use the "Held by" dropdown. Add notes there too.
 - **Undo / Redo** in the top bar, or Ctrl+Z and Shift+Ctrl+Z. The change log ("Recent changes") is never rewritten: undoing adds a line.
 - **Battles:** open a territory (the Territory tab) to see its battle history, with "fought N times" and "changed hands N times". In GM mode, "Record a battle": date, attacker and defender, the players on each side, the outcome (captured, repelled, draw) and a note. A capture can give the territory to the attacker in the same step. **Edit** and **Delete** fix a bad report; they change only the history, and if the battle had captured the territory you are asked whether to change the holder back. Deleting is the easy way out for a report that is too wrong to fix.
-- **Reset the map** (bottom of the sidebar, GM mode): choose a starting position, confirm, and it downloads a backup file of the current map first. The reset can still be undone, and the log is kept.
-- Everything is saved in this browser automatically. Until live sync is built, each browser has its own copy of the map.
+- **Reset the map** (bottom of the Changes tab, GM mode): choose a starting position and confirm. It clears the holders, the battle history and the change log, after downloading a backup file of everything. It can still be undone.
+- **Nothing is stored in the browser.** Everyone sees the published map, `public/campaign.json`. Your edits live in memory until you save them (see Publishing). If you try to close or refresh the page with unsaved edits, the browser asks first.
+
+## Publishing the map
+
+The map everyone sees is **public/campaign.json** in the repository: holders, notes, battles and the change log. The page loads it every time it opens. To change what everyone sees:
+
+1. Open the site (or `npm run dev`), enter GM mode and make your changes.
+2. Click **Save to file** in the top bar. It downloads `campaign.json`.
+3. Replace `public/campaign.json` in the repository with that file, commit and push to `main`. (On github.com you can also open the file, choose Edit, and upload or paste the new contents.)
+4. GitHub rebuilds the site (about a minute); then everyone sees the new map after a refresh.
+
+The top bar tells you where you are: **Unsaved changes** (not yet in a file), **Saved to file, not published yet** (downloaded but not yet the repository's copy). If `campaign.json` is missing or broken the page shows the default start with a notice. `npm run validate` (and the deploy) check the file against the current map, so a file made for an older map is rejected before it goes live.
+
+Why not automatic? GitHub Pages is read-only, so the page cannot write the file itself. A database (live updates for everyone, no manual step) is the planned next step.
+
+## Putting it on GitHub Pages
+
+1. Create a GitHub repository and push this project to the `main` branch.
+2. In the repository: **Settings, Pages, Build and deployment, Source: GitHub Actions**.
+3. The workflow in `.github/workflows/deploy.yml` runs on every push to `main`: it runs the tests, validates the data, builds, and publishes the site. The address is `https://<your-user>.github.io/<repository>/`.
+4. The site is public to anyone with the link (even from a private repository). It asks search engines not to list it, but treat the link as shared with your group only.
+
+(I could not run the workflow from here, so the first deploy is the real test. If it fails, the Actions tab shows which step.)
 
 ## Next up
 
-- Export and import the map as a file, a share link, and a PNG for Discord.
-- Live sync (Supabase) so everyone sees the same map, then deploy.
+- A PNG export of the map for posting in Discord.
+- A database, so changes show up for everyone without the manual publish step.

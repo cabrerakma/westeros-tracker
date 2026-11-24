@@ -1,34 +1,26 @@
 import type { GameState } from "../types";
-import { normalizeState } from "./game";
 
-const KEY = "westeros-tracker-state-v1";
-
-/** Saved state from this browser, or null (nothing saved, unreadable, or an unknown version). Never throws. */
-export function loadState(): GameState | null {
-  try {
-    const raw = localStorage.getItem(KEY);
-    return raw ? normalizeState(JSON.parse(raw)) : null;
-  } catch {
-    return null;
-  }
-}
-
-export function saveState(state: GameState): void {
-  try {
-    localStorage.setItem(KEY, JSON.stringify(state));
-  } catch {
-    // Storage can be full or blocked (private window); the map still works, it just will not persist.
-  }
-}
-
-/** Download the full state as a JSON file (used as the backup before a reset). */
-export function downloadBackup(state: GameState, label = "westeros-backup"): void {
-  const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+/**
+ * Nothing is kept in local storage. The shared map is public/campaign.json (see campaign.ts); the GM
+ * edits in memory and downloads a new campaign.json to publish it (replace the file in the repo, commit).
+ */
+function download(json: string, filename: string): void {
+  const blob = new Blob([json], { type: "application/json" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
-  const stamp = new Date().toISOString().replace(/[:T]/g, "-").slice(0, 16);
   a.href = url;
-  a.download = `${label}-${stamp}.json`;
+  a.download = filename;
   a.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+/** The file to publish: always named campaign.json, so it can be dropped straight into the repo. */
+export function downloadCampaign(state: GameState): void {
+  download(JSON.stringify(state, null, 2) + "\n", "campaign.json");
+}
+
+/** A timestamped copy (used as the backup before a reset). */
+export function downloadBackup(state: GameState, label = "westeros-backup"): void {
+  const stamp = new Date().toISOString().replace(/[:T]/g, "-").slice(0, 16);
+  download(JSON.stringify(state, null, 2) + "\n", `${label}-${stamp}.json`);
 }

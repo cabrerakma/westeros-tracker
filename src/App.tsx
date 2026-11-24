@@ -3,7 +3,9 @@ import { SCENARIOS, TERRITORIES } from "./data";
 import { MapView, type Layers, type MapHandle } from "./map/MapView";
 import { checkPasscode } from "./state/gm";
 import { historyReducer, initialHistory, initialState, newMeta, normalizeState } from "./state/game";
-import { downloadBackup, loadState, saveState } from "./state/persistence";
+import type { GameState } from "./types";
+import { loadCampaign, stateKey } from "./state/campaign";
+import { downloadBackup, downloadCampaign } from "./state/persistence";
 import { BattlePanel, type BattleInput } from "./ui/BattlePanel";
 import { Legend } from "./ui/Legend";
 import { LogPanel } from "./ui/LogPanel";
@@ -17,10 +19,34 @@ const LAYER_LABELS: [keyof Layers, string][] = [
 ];
 
 export function App() {
-  // The saved map from this browser if there is one, otherwise the default start.
-  const [hist, dispatch] = useReducer(historyReducer, null, () => initialHistory(loadState() ?? initialState()));
+  // Everyone sees the published map, campaign.json. Nothing is stored in the browser.
+  const [hist, dispatch] = useReducer(historyReducer, null, () => initialHistory(initialState()));
   const state = hist.present;
-  useEffect(() => saveState(state), [state]);
+  const [loaded, setLoaded] = useState(false);
+  const [published, setPublished] = useState<GameState | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
+  const [savedKey, setSavedKey] = useState<string | null>(null); // the version last saved to a file
+
+  useEffect(() => {
+    let cancelled = false;
+    loadCampaign()
+      .then((s) => {
+        if (cancelled) return;
+        setPublished(s);
+        dispatch({ type: "replaceHistory", state: s });
+      })
+      .catch((e) => {
+        if (cancelled) return;
+        const fallback = initialState();
+        setPublished(fallback);
+        dispatch({ type: "replaceHistory", state: fallback });
+        setNotice(`Could not load the published map (${e instanceof Error ? e.message : e}). Showing the default start instead.`);
+      })
+      .finally(() => !cancelled && setLoaded(true));
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const [gm, setGm] = useState(false); // always starts in View mode
   const [paintId, setPaintId] = useState<string | null>(null);
@@ -29,6 +55,23 @@ export function App() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [layers, setLayers] = useState<Layers>({ regionBorders: true, regionNames: true, regionCaptions: true, castleLabels: true });
   const [resetTo, setResetTo] = useState("war-of-five-kings");
+
+  // Is the map you are looking at the same as the published one, or the last file you saved?
+  const key = useMemo(() => stateKey(state), [state]);
+  const publishedKey = useMemo(() => (published ? stateKey(published) : null), [published]);
+  const unsaved = gm && key !== (savedKey ?? publishedKey);
+  const unpublished = loaded && key !== publishedKey;
+
+  // Closing or refreshing with unsaved edits would lose them, so the browser asks first.
+  useEffect(() => {
+    if (!unsaved) return;
+    const warn = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = "";
+    };
+    window.addEventListener("beforeunload", warn);
+    return () => window.removeEventListener("beforeunload", warn);
+  }, [unsaved]);
   const map = useRef<MapHandle>(null);
 
   const factions = state.factions;
@@ -89,7 +132,11 @@ export function App() {
     setPaintId(null);
   };
 
-  const saveToFile = () => downloadBackup(state, "westeros-map");
+  const saveToFile = () => {
+    downloadCampaign(state);
+    setSavedKey(key);
+    setNotice("Saved campaign.json to your Downloads folder. To publish it: replace public/campaign.json in the repository with this file, then commit and push.");
+  };
   const loadFromFile = async (file: File | undefined) => {
     if (!file) return;
     try {
@@ -103,11 +150,18 @@ export function App() {
     }
   };
 
+  if (!loaded) return <div className="loading">Loading the map…</div>;
+
   return (
     <div className="app">
       <header className="topbar">
         <h1>Westeros Tracker</h1>
         {gm && <span className="badge">GM mode</span>}
+        {unsaved ? (
+          <span className="badge warn">Unsaved changes</span>
+        ) : (
+          unpublished && <span className="badge info">{gm ? "Saved to file, not published yet" : "Not published yet (only you see this)"}</span>
+        )}
         <div className="spacer" />
         {gm && (
           <>
@@ -118,6 +172,11 @@ export function App() {
               Redo
             </button>
           </>
+        )}
+        {gm && (
+          <button className="primary" onClick={saveToFile} title="Download campaign.json to publish">
+            Save to file
+          </button>
         )}
         <button onClick={() => map.current?.fit()}>Fit all</button>
         <details className="layers">
@@ -137,6 +196,12 @@ export function App() {
           {gm ? "Exit GM mode" : "GM mode"}
         </button>
       </header>
+      {notice && (
+        <div className="notice-banner">
+          <span>{notice}</span>
+          <button onClick={() => setNotice(null)}>Dismiss</button>
+        </div>
+      )}
       {gm && paintId && (
         <div className="paint-banner">
           Painting with <b>{paintName}</b>. Click territories to give them to it.
@@ -204,10 +269,9 @@ export function App() {
             <LogPanel log={state.log} factions={factions} />
             {gm && (
               <section className="reset">
-                <h2>Save and load</h2>
-                <p className="muted small">The map, battles and log live in this browser. Save a copy to a file to keep it or move it elsewhere.</p>
+                <h2>Publish and load</h2>
+                <p className="muted small">Everyone sees the map in campaign.json. "Save to file" (top bar) downloads a new one; replace the file in the repository and push to publish it. Nothing is stored in this browser.</p>
                 <div className="battle-actions">
-                  <button onClick={saveToFile}>Save to file</button>
                   <label className="file-button">
                     Load from file…
                     <input

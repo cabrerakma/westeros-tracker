@@ -21,6 +21,7 @@ export type Action =
   | ({ type: "deleteBattle"; battleId: string } & Meta)
   | ({ type: "loadScenario"; scenarioId: string } & Meta)
   | ({ type: "importState"; state: GameState } & Meta)
+  | { type: "replaceHistory"; state: GameState } // load a map as the starting point (no log entry, no undo)
   | ({ type: "undo" } & Meta)
   | ({ type: "redo" } & Meta);
 
@@ -52,6 +53,7 @@ function commit(h: History, next: GameState): History {
 }
 
 export function historyReducer(h: History, a: Action): History {
+  if (a.type === "replaceHistory") return initialHistory(a.state);
   const s = h.present;
   switch (a.type) {
     case "setHolder": {

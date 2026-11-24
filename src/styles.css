@@ -136,3 +136,10 @@ button.danger:hover { background: #f6d9d2; }
 .file-button:hover { background: #fff6dc; }
 .file-button input { display: none; }
 .reset h2:not(:first-child) { margin-top: 10px; }
+
+/* publishing */
+.loading { display: grid; place-items: center; height: 100%; color: #f1e6c8; font: 600 20px var(--font-display); letter-spacing: 0.06em; }
+.badge.warn { background: #b3591e; }
+.badge.info { background: #5b6f7a; }
+.topbar button.primary { background: #f3d98b; border-color: #b08a2a; font-weight: bold; }
+.notice-banner { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 14px; background: #e3ecd6; border-bottom: 1px solid #8aa06a; }

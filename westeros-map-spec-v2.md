@@ -9,6 +9,7 @@ Revised Nov 24, 2026. Supersedes `westeros-map-spec.md`. This version cuts the r
 > - **Starting holders follow the A Song of Ice and Fire miniatures game:** Joffrey's King's Landing and Duskendale are Lannister, Renly's Stormlands (Storm's End, Bronzegate, Tarth, Nightsong) are Tyrell, and Baratheon (Stannis) starts with Dragonstone only. Home factions stay Baratheon for these, so they show the occupied ring. This overrides the default-holder column in section 3. The map only tracks who holds what.
 > - **The Vale is scenery** (irrelevant to the war): it is drawn, labelled and unselectable, like Skagos. That removes its 4 territories and the region, leaving 42 territories in 11 regions. The built-in Unclaimed faction stays for the blank scenario.
 > - **Battles can be edited or deleted** by the GM, to fix erroneous reports. Stats are derived from the list, so they update by themselves. Edits and deletions are logged. They change only the history; if the battle had captured a territory, offer to change the holder back (a prompt, never automatic). Deleting is the easy way out for a bad report.
+> - **Persistence is a JSON file, not local storage and not Supabase (for now).** The shared map is `public/campaign.json` in the repo; the GM edits in memory, clicks Save to file, replaces the file and pushes; GitHub Pages republishes. No live sync, no token, no database until later. Section 8's Supabase plan is deferred.
 > - **Simplest option wins.** Where this spec is ambiguous, build the smaller thing.
 
 ## 1. Overview
