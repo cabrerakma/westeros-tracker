@@ -2,7 +2,7 @@
 
 A browser map of Westeros for tracking which faction holds which of 42 territories in a friends' wargame campaign, with a per-territory battle history. One game master (GM) edits; everyone else watches. Full design: [westeros-map-spec-v2.md](westeros-map-spec-v2.md).
 
-**Status:** M0 (scaffold and data) and M1 (static map, real geography) done. Next: M2 (control and GM editing).
+**Status:** M0 (scaffold and data), M1 (static map, real geography) and M2 (GM editing) done. Next: export/import and sharing, battle history, then live sync.
 
 ## Run it
 
@@ -71,7 +71,17 @@ Map geography: *Game of Thrones* shapefiles. Map of Westeros by Tear (Cartograph
 - Pentos and Braavos are Free Cities with home faction Targaryen. "Bravos" in the request is spelled "Braavos" here.
 - No turn counter or game rules anywhere; this is a tracker only.
 
+## Using it
+
+- **View mode** is the default: anyone can look, click territories and read the notes. Nothing can be changed.
+- **GM mode** (top bar) asks for the passcode, `password234`. It is set in `src/state/gm.ts` and is checked in the browser only, so it stops casual edits, not someone who reads the page's code.
+- In GM mode: pick a faction in "Who holds what", then click territories to give them to it (Esc stops). Or open a territory and use the "Held by" dropdown. Add notes there too.
+- **Undo / Redo** in the top bar, or Ctrl+Z and Shift+Ctrl+Z. The change log ("Recent changes") is never rewritten: undoing adds a line.
+- **Reset the map** (bottom of the sidebar, GM mode): choose a starting position, confirm, and it downloads a backup file of the current map first. The reset can still be undone, and the log is kept.
+- Everything is saved in this browser automatically. Until live sync is built, each browser has its own copy of the map.
+
 ## Next up
 
-- GM editing (change a holder, paint mode, undo/redo, change log, saving in the browser).
-- **Reset button**, to be built together with GM editing and battle logging: it puts the map back to a starting scenario, asks for confirmation first, and downloads a backup of the current state and battle history before clearing anything.
+- Export and import the map as a file, a share link, and a PNG for Discord.
+- Battle history per territory (date, who fought, who won, players, notes), recorded from the territory panel. The reset button already keeps and backs up battles.
+- Live sync (Supabase) so everyone sees the same map, then deploy.

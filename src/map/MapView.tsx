@@ -28,6 +28,8 @@ interface Props {
   selectedId: string | null;
   onSelect(id: string | null): void;
   layers: Layers;
+  /** GM paint mode is on: clicking a territory assigns it, so show a crosshair. */
+  paintMode?: boolean;
 }
 
 interface ShapeProps {
@@ -69,7 +71,7 @@ const TerritoryShape = memo(function TerritoryShape({ id, d, fill, label, select
 
 const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
 
-export const MapView = forwardRef<MapHandle, Props>(function MapView({ holders, factions, selectedId, onSelect, layers }, ref) {
+export const MapView = forwardRef<MapHandle, Props>(function MapView({ holders, factions, selectedId, onSelect, layers, paintMode }, ref) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const gRef = useRef<SVGGElement>(null);
@@ -164,7 +166,7 @@ export const MapView = forwardRef<MapHandle, Props>(function MapView({ holders, 
   };
 
   return (
-    <div className="map-wrap" ref={wrapRef}>
+    <div className={"map-wrap" + (paintMode ? " painting" : "")} ref={wrapRef}>
       <svg ref={svgRef} className="map-svg" viewBox={`0 0 ${VIEWBOX[2]} ${VIEWBOX[3]}`} preserveAspectRatio="xMidYMid meet" role="group" aria-label="Map of Westeros" onClick={(e) => e.target === e.currentTarget && onSelect(null)}>
         <defs>
           <radialGradient id="ocean" cx="50%" cy="45%" r="75%">
