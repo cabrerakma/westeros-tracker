@@ -63,6 +63,14 @@ button.link { border: none; background: none; color: var(--accent); text-decorat
   .sidebar { width: 220px; padding: 8px 10px; }
   .topbar { padding: 4px 8px; }
 }
+/* Phones held upright: the map on top, the panel below, instead of a 300px sidebar squeezing the map. */
+@media (max-width: 700px) and (orientation: portrait) {
+  .topbar { flex-wrap: wrap; gap: 6px; padding: 6px 10px; }
+  .topbar h1 { font-size: 16px; }
+  .body { flex-direction: column; }
+  .map-wrap { flex: 1 1 55%; min-height: 0; }
+  .sidebar { width: auto; flex: 1 1 45%; border-left: none; border-top: 2px solid #3b2f20; padding: 10px 12px; }
+}
 @media print {
   .topbar, .sidebar { display: none; }
   .map-wrap { background: none; }
