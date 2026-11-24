@@ -101,7 +101,7 @@ const SEA_LINKS_EXTRA = [
 ];
 const SKIP_AUTO_SEA_LINK = ["pentos", "braavos"]; // linked explicitly above, not to the nearest Westeros territory
 // Land drawn as unselectable scenery (not part of any territory): [lonMin, latMin, lonMax, latMax].
-const SCENERY_BOXES = [[22.9, 32.8, 26.6, 37.2]]; // Skagos, Skane and the islets east of them
+const SCENERY_BOXES = [[22.9, 32.8, 26.6, 38.6]]; // Skagos, Skane and the islets around them
 const FORCE_NOT_ADJACENT = []; // [a, b] pairs removed from derived land adjacency
 
 // Region priority: earlier regions win overlaps. political = names in the source layer.
