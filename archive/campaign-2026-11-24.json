@@ -1,0 +1,227 @@
+{
+  "version": 1,
+  "scenarioId": "war-of-five-kings",
+  "territories": {
+    "haunted-forest": {
+      "holder": "free-folk"
+    },
+    "frostfangs": {
+      "holder": "free-folk"
+    },
+    "hardhome": {
+      "holder": "free-folk"
+    },
+    "castle-black": {
+      "holder": "night-watch"
+    },
+    "last-hearth": {
+      "holder": "stark"
+    },
+    "karhold": {
+      "holder": "stark"
+    },
+    "bear-island": {
+      "holder": "stark"
+    },
+    "deepwood-motte": {
+      "holder": "stark"
+    },
+    "winterfell": {
+      "holder": "stark"
+    },
+    "dreadfort": {
+      "holder": "bolton"
+    },
+    "white-harbor": {
+      "holder": "stark"
+    },
+    "moat-cailin": {
+      "holder": "stark"
+    },
+    "the-twins": {
+      "holder": "stark"
+    },
+    "seagard": {
+      "holder": "stark"
+    },
+    "riverrun": {
+      "holder": "stark"
+    },
+    "harrenhal": {
+      "holder": "stark"
+    },
+    "raventree-hall": {
+      "holder": "stark"
+    },
+    "casterly-rock": {
+      "holder": "lannister"
+    },
+    "golden-tooth": {
+      "holder": "lannister"
+    },
+    "the-crag": {
+      "holder": "lannister"
+    },
+    "ashemark": {
+      "holder": "lannister"
+    },
+    "pyke": {
+      "holder": "greyjoy"
+    },
+    "harlaw": {
+      "holder": "greyjoy"
+    },
+    "kings-landing": {
+      "holder": "lannister"
+    },
+    "dragonstone": {
+      "holder": "baratheon"
+    },
+    "duskendale": {
+      "holder": "lannister"
+    },
+    "highgarden": {
+      "holder": "tyrell"
+    },
+    "goldengrove": {
+      "holder": "tyrell"
+    },
+    "horn-hill": {
+      "holder": "tyrell"
+    },
+    "oldtown": {
+      "holder": "tyrell"
+    },
+    "the-arbor": {
+      "holder": "tyrell"
+    },
+    "brightwater-keep": {
+      "holder": "tyrell"
+    },
+    "storms-end": {
+      "holder": "tyrell"
+    },
+    "bronzegate": {
+      "holder": "tyrell"
+    },
+    "nightsong": {
+      "holder": "tyrell"
+    },
+    "tarth": {
+      "holder": "tyrell"
+    },
+    "yronwood": {
+      "holder": "martell"
+    },
+    "sunspear": {
+      "holder": "martell"
+    },
+    "starfall": {
+      "holder": "martell"
+    },
+    "hellholt": {
+      "holder": "martell"
+    },
+    "pentos": {
+      "holder": "targaryen"
+    },
+    "braavos": {
+      "holder": "targaryen"
+    }
+  },
+  "factions": [
+    {
+      "id": "stark",
+      "name": "House Stark",
+      "color": "#8FA3B0",
+      "glyph": "wolf",
+      "isPlayer": true
+    },
+    {
+      "id": "lannister",
+      "name": "House Lannister",
+      "color": "#B3261E",
+      "glyph": "lion",
+      "isPlayer": true
+    },
+    {
+      "id": "baratheon",
+      "name": "House Baratheon",
+      "color": "#E0B020",
+      "glyph": "stag",
+      "isPlayer": true
+    },
+    {
+      "id": "targaryen",
+      "name": "House Targaryen",
+      "color": "#6A1B4D",
+      "glyph": "dragon",
+      "isPlayer": true
+    },
+    {
+      "id": "greyjoy",
+      "name": "House Greyjoy",
+      "color": "#1E3A4C",
+      "glyph": "kraken",
+      "isPlayer": true
+    },
+    {
+      "id": "tyrell",
+      "name": "House Tyrell",
+      "color": "#3E8E3E",
+      "glyph": "rose",
+      "isPlayer": true
+    },
+    {
+      "id": "martell",
+      "name": "House Martell",
+      "color": "#E4731C",
+      "glyph": "sun-spear",
+      "isPlayer": true
+    },
+    {
+      "id": "night-watch",
+      "name": "Night's Watch",
+      "color": "#2B2B2B",
+      "glyph": "crossed-swords",
+      "isPlayer": false
+    },
+    {
+      "id": "free-folk",
+      "name": "Free Folk",
+      "color": "#A58B5B",
+      "glyph": "horned-skull",
+      "isPlayer": false
+    },
+    {
+      "id": "bolton",
+      "name": "House Bolton",
+      "color": "#F0B8C8",
+      "glyph": "flayed-man",
+      "isPlayer": false
+    },
+    {
+      "id": "brotherhood",
+      "name": "Brotherhood without Banners",
+      "color": "#6B4A2B",
+      "glyph": "flaming-sword",
+      "isPlayer": false
+    },
+    {
+      "id": "mercenaries",
+      "name": "Neutrals (Mercenaries)",
+      "color": "#7C7C3A",
+      "glyph": "coin-dagger",
+      "isPlayer": false
+    },
+    {
+      "id": "neutral",
+      "name": "Unclaimed",
+      "color": "#E8DCC0",
+      "glyph": "none",
+      "isPlayer": false
+    }
+  ],
+  "log": [],
+  "battles": []
+}

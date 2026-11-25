@@ -126,7 +126,7 @@
       "holder": "targaryen"
     },
     "braavos": {
-      "holder": "targaryen"
+      "holder": "free-folk"
     }
   },
   "factions": [
@@ -222,6 +222,38 @@
       "isPlayer": false
     }
   ],
-  "log": [],
-  "battles": []
+  "log": [
+    {
+      "id": "6003d8dc-98df-4cd4-92ea-dead7bd291c2",
+      "timestamp": "2026-11-25T01:32:16.022Z",
+      "territory": "braavos",
+      "action": "battle-recorded",
+      "from": "free-folk",
+      "to": "targaryen",
+      "note": "captured"
+    }
+  ],
+  "battles": [
+    {
+      "id": "0431925c-d12b-49a8-9462-257df01f1b28",
+      "timestamp": "2026-11-24T04:00:00.000Z",
+      "territory": "braavos",
+      "attacker": {
+        "faction": "free-folk",
+        "players": [
+          "krizzybear19"
+        ]
+      },
+      "defender": {
+        "faction": "targaryen",
+        "players": [
+          "J-sheesh"
+        ]
+      },
+      "outcome": "captured",
+      "holderBefore": "targaryen",
+      "holderAfter": "free-folk",
+      "note": "Styr, Magnar of Thenn, took Braavos. Eat shit, lizard lords."
+    }
+  ]
 }
